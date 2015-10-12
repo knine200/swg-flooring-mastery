@@ -1,0 +1,2 @@
+﻿StateAbbreviation,StateName,TaxRate
+OH,Ohio,6.50

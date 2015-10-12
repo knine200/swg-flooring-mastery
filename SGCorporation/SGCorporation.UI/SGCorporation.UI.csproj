@@ -61,6 +61,22 @@
     <Content Include="DataFiles\Orders_06012013.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="DataFiles\ProductFile.txt" />
+    <Content Include="DataFiles\TaxFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGCorporation.BLL\SGCorporation.BLL.csproj">
+      <Project>{6d7c2969-7d7b-486d-a283-e83eb156be6e}</Project>
+      <Name>SGCorporation.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGCorporation.Data\SGCorporation.Data.csproj">
+      <Project>{5b3a5a06-2090-4085-abde-fe672ad103f1}</Project>
+      <Name>SGCorporation.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGCorporation.Models\SGCorporation.Models.csproj">
+      <Project>{54248eac-9181-4251-8c05-dc8084434cd8}</Project>
+      <Name>SGCorporation.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
