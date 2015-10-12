@@ -50,9 +50,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataFiles\" />
     <Folder Include="Utilities\" />
     <Folder Include="Workflows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataFiles\Orders_06012013.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
