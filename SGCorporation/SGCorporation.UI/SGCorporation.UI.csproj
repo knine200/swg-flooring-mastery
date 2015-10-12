@@ -45,13 +45,17 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflows\AddOrderWorkflow.cs" />
+    <Compile Include="Workflows\DisplayOrdersWorkflow.cs" />
+    <Compile Include="Workflows\EditOrderWorkflow.cs" />
+    <Compile Include="Workflows\MainMenu.cs" />
+    <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
-    <Folder Include="Workflows\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataFiles\Orders_06012013.txt">
