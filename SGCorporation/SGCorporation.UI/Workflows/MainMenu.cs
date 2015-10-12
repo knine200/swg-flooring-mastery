@@ -54,6 +54,7 @@ namespace SGCorporation.UI.Workflows
                 default:
                     Console.WriteLine("{0} is an invalid entry!", choice);
                     Console.WriteLine("Press Enter to continue....");
+                    Console.ReadLine();
                     break;
 
             }
