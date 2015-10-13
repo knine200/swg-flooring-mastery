@@ -11,5 +11,6 @@ namespace SGCorporation.Models
         public bool Success { get; set; }
         public string Message { get; set; }
         public OrderSlip OrderSlip { get; set; }
+        public CreateOrderSlip CreateOrderInfo { get; set; }
     }
 }

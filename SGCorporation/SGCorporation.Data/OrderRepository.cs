@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,11 +90,38 @@ namespace SGCorporation.Data
                         order.CostPerSquareFoot,
                         order.LaborCostPerSquareFoot,
                         order.MaterialCost,
-                        order.LaborCostPerSquareFoot,
+                        order.LaborCost,
                         order.Tax,
                         order.Total);
                 }
             }
+        }
+        public int WriteNewLine(Order Order)
+        {
+            string input = "01012016";
+            string format = "MMddyyyy";
+            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+            List<Order> orders = GetAllOrders(date);
+            int newOrderNo = orders.Max(a => a.OrderNumber) + 1;
+
+            using (StreamWriter writer = File.AppendText(GetFilePath(date)))
+            {
+                writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
+                    newOrderNo,
+                    Order.CustomerName,
+                    Order.StateName,
+                    Order.TaxRate,
+                    Order.ProductType,
+                    Order.Area,
+                    Order.CostPerSquareFoot,
+                    Order.LaborCostPerSquareFoot,
+                    Order.MaterialCost,
+                    Order.LaborCost,
+                    Order.Tax,
+                    Order.Total);
+            }
+            return newOrderNo;
         }
     }
 }
