@@ -59,16 +59,17 @@ namespace SGCorporation.Data
             return orders;
         }
 
-        public Order GetOrder(OrderSlip OrderSlip)
+        public Order GetOrder(DateTime OrderDate)
         {
-            List<Order> orders = GetAllOrders(OrderSlip.OrderDate);
+            List<Order> orders = GetAllOrders(OrderDate);
 
-            return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
+            var orderslip = new OrderSlip();
+            return orders.FirstOrDefault(x => x.OrderNumber == orderslip.Order.OrderNumber);
         }
 
-        public void OverwriteFile(List<Order> orders, DateTime orderDate)
+        public void OverwriteFile(List<Order> orders, DateTime OrderDate)
         {
-            string ordersFilePath = GetFilePath(orderDate);
+            string ordersFilePath = GetFilePath(OrderDate);
 
             using (StreamWriter writer = File.CreateText(ordersFilePath))
             {
