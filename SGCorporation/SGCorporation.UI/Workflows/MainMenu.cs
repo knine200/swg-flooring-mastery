@@ -44,6 +44,8 @@ namespace SGCorporation.UI.Workflows
             switch (choice)
             {
                 case "1":
+                    DisplayOrdersWorkflow dow = new DisplayOrdersWorkflow();
+                    dow.Execute();
                     break;
                 case "2":
                     break;

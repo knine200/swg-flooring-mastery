@@ -17,7 +17,7 @@ namespace SGCorporation.Data
             //File names are always in the following format Orders_MMDDYYYY.
             //The DateTime object is accepted and converted to a string.
             //Then it's concatenated to form the file path.
-            string ordersFilePath = @"DataFiles\Orders_" + OrderDate + ".txt";
+            string ordersFilePath = @"DataFiles\Orders_" + OrderDate.ToString("MMDDYYYY") + ".txt";
 
             return ordersFilePath;
         }
@@ -64,6 +64,7 @@ namespace SGCorporation.Data
             List<Order> orders = GetAllOrders(OrderDate);
 
             OrderSlip OrderSlip = new OrderSlip();
+
 
             return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
         }
