@@ -12,9 +12,9 @@ namespace SGCorporation.UI
     {
         static void Main(string[] args)
         {
-            ReadSettings();
-            //MainMenu main = new MainMenu();
-            //main.Execute();
+            //ReadSettings();
+            MainMenu main = new MainMenu();
+            main.Execute();
             Console.ReadLine();
 
         }

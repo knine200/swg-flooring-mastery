@@ -11,7 +11,7 @@ namespace SGCorporation.Data
 {
     public class OrderRepository : IOrderRepository
     {
-        public string GetFilePath(string OrderDate)
+        public string GetFilePath(DateTime OrderDate)
         {
             //File names vary depending on the date.
             //File names are always in the following format Orders_MMDDYYYY.
@@ -22,7 +22,7 @@ namespace SGCorporation.Data
             return ordersFilePath;
         }
 
-        public List<Order> GetAllOrders(string OrderDate)
+        public List<Order> GetAllOrders(DateTime OrderDate)
         {
             List<Order> orders = new List<Order>();
 
@@ -59,14 +59,16 @@ namespace SGCorporation.Data
             return orders;
         }
 
-        public Order GetOrder(OrderSlip OrderDate)
+        public Order GetOrder(DateTime OrderDate)
         {
-            List<Order> orders = GetAllOrders(OrderDate.OrderDate);
+            List<Order> orders = GetAllOrders(OrderDate);
 
-            return orders.FirstOrDefault(x => x.OrderNumber == OrderDate.Order.OrderNumber);
+            OrderSlip OrderSlip = new OrderSlip();
+
+            return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
         }
 
-        public void OverwriteFile(List<Order> orders, string OrderDate)
+        public void OverwriteFile(List<Order> orders, DateTime OrderDate)
         {
             string ordersFilePath = GetFilePath(OrderDate);
 

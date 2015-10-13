@@ -10,7 +10,7 @@ namespace SGCorporation.BLL
 {
     public class OrderOperations
     {
-        public Response GetOrder(OrderSlip OrderDate)
+        public Response GetOrder(DateTime OrderDate)
         {
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
