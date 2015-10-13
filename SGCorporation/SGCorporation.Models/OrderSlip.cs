@@ -8,7 +8,7 @@ namespace SGCorporation.Models
 {
     public class OrderSlip
     {
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
         public Order Order { get; set; }
     }
 }

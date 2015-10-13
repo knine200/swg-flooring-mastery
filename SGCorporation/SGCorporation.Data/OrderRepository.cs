@@ -11,18 +11,18 @@ namespace SGCorporation.Data
 {
     public class OrderRepository : IOrderRepository
     {
-        public string GetFilePath(DateTime OrderDate)
+        public string GetFilePath(string OrderDate)
         {
             //File names vary depending on the date.
             //File names are always in the following format Orders_MMDDYYYY.
             //The DateTime object is accepted and converted to a string.
             //Then it's concatenated to form the file path.
-            string ordersFilePath = @"DataFiles\Orders_" + OrderDate.ToString("MMDDYYYY") + ".txt";
+            string ordersFilePath = @"DataFiles\Orders_" + OrderDate + ".txt";
 
             return ordersFilePath;
         }
 
-        public List<Order> GetAllOrders(DateTime OrderDate)
+        public List<Order> GetAllOrders(string OrderDate)
         {
             List<Order> orders = new List<Order>();
 
@@ -59,16 +59,16 @@ namespace SGCorporation.Data
             return orders;
         }
 
-        public Order GetOrder(OrderSlip OrderSlip)
+        public Order GetOrder(OrderSlip OrderDate)
         {
-            List<Order> orders = GetAllOrders(OrderSlip.OrderDate);
+            List<Order> orders = GetAllOrders(OrderDate.OrderDate);
 
-            return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
+            return orders.FirstOrDefault(x => x.OrderNumber == OrderDate.Order.OrderNumber);
         }
 
-        public void OverwriteFile(List<Order> orders, DateTime orderDate)
+        public void OverwriteFile(List<Order> orders, string OrderDate)
         {
-            string ordersFilePath = GetFilePath(orderDate);
+            string ordersFilePath = GetFilePath(OrderDate);
 
             using (StreamWriter writer = File.CreateText(ordersFilePath))
             {
