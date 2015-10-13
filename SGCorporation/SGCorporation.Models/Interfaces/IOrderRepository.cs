@@ -8,6 +8,6 @@ namespace SGCorporation.Models.Interfaces
 {
     public interface IOrderRepository
     {
-        List<Order> GetOrderInformation(DateTime OrderDate);
+        List<Order> GetAllOrders(DateTime OrderDate);
     }
 }
