@@ -10,14 +10,14 @@ namespace SGCorporation.BLL
 {
     public class OrderOperations
     {
-        public Response GetOrder(DateTime OrderDate)
+        public Response GetAllOrders(DateTime OrderDate)
         {
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
 
-            Order order = repo.GetOrder(OrderDate);
+            List<Order> orders = repo.GetAllOrders(OrderDate);
 
-            if (order == null)
+            if (orders == null)
             {
                 response.Success = false;
                 response.Message = "This order does not exist";
@@ -25,7 +25,13 @@ namespace SGCorporation.BLL
             else
             {
                 response.Success = true;
-                response.OrderSlip.Order = order;
+                response.Message = "You got all the orders for the date";
+            }
+
+            foreach (var order in orders)
+            {
+                Console.WriteLine("OrderNumber: {0}, CustomerName: {1}, Area: {2}, CostPerSquareFoot: {3}, LaborCostPerSquareFoot: {4}, MaterialCost: {5}, LaborCost: {6}, Tax: {7}, Total: {8}", order.OrderNumber,  order.CustomerName, order.Area,order.CostPerSquareFoot, order.LaborCostPerSquareFoot,  order.MaterialCost, order.LaborCost, order.Tax, order.Total);
+                
             }
 
             return response;

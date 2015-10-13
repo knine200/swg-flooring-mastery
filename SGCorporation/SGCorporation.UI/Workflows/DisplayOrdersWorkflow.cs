@@ -26,8 +26,11 @@ namespace SGCorporation.UI.Workflows
             Console.Clear();
             Console.Write("Enter the date for your order (MMDDYYYY): ");
             string input = Console.ReadLine();
+            string format = "MMddyyyy";
 
-            DateTime date = Convert.ToDateTime(input).Date;
+            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+           // DateTime date = Convert.ToDateTime(input).Date;
 
             return date;
         }
@@ -35,13 +38,12 @@ namespace SGCorporation.UI.Workflows
         public void DisplayOrderInformation(DateTime userDate)
         {
             OrderOperations ops = new OrderOperations();
-            Response response = ops.GetOrder(userDate);
+            Response response = ops.GetAllOrders(userDate);
 
-            if (response.Success)
+            if (response.Success == true)
             {
-                _currentOrder = response.OrderSlip.Order;
-                PrintOrderInformation(response.OrderSlip);
-
+                Console.WriteLine(response.Message);
+                Console.ReadLine();
             }
         }
 
