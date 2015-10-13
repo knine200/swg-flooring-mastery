@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace SGCorporation.BLL
             return response;
         }
 
-        public Response CreateAccount()
+        public Response CreateOrder()
         {
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
@@ -75,21 +76,33 @@ namespace SGCorporation.BLL
             string Total = Console.ReadLine();
             newOrder.Total = decimal.Parse(Total);
 
-            int returnedAccountNumber = repo.WriteNewLine(newAccount);
+            int returnedOrderNumber = repo.WriteNewLine(newOrder);
 
-            if (returnedAccountNumber == repo.GetAllAccounts().Count)
+            string input = "01012016";
+            string format = "MMddyyyy";
+            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+            if (returnedOrderNumber == repo.GetAllOrders(date).Count)
             {
                 response.Success = true;
-                response.CreateAccountInfo = new CreateAccountSlip();
-                response.CreateAccountInfo.AccountNumber = returnedAccountNumber;
-                response.CreateAccountInfo.FirstName = newAccount.FirstName;
-                response.CreateAccountInfo.LastName = newAccount.LastName;
-                response.CreateAccountInfo.NewBalance = newAccount.Balance;
+                response.CreateOrderInfo = new CreateOrderSlip();
+                response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
+                response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
+                response.CreateOrderInfo.StateName = newOrder.StateName;
+                response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
+                response.CreateOrderInfo.ProductType = newOrder.ProductType;
+                response.CreateOrderInfo.Area = newOrder.Area;
+                response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
+                response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
+                response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
+                response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
+                response.CreateOrderInfo.Tax = newOrder.Tax;
+                response.CreateOrderInfo.Total = newOrder.Total;
             }
             else
             {
                 response.Success = false;
-                response.Message = "Account creation failed. Please try again.";
+                response.Message = "Order creation failed. Please try again.";
             }
 
             return response;

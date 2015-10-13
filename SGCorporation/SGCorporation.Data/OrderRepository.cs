@@ -107,7 +107,7 @@ namespace SGCorporation.Data
 
             using (StreamWriter writer = File.AppendText(GetFilePath(date)))
             {
-                writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
+                writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}",
                     newOrderNo,
                     Order.CustomerName,
                     Order.StateName,

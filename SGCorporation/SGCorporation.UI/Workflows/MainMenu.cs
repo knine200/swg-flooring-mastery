@@ -48,6 +48,8 @@ namespace SGCorporation.UI.Workflows
                     dow.Execute();
                     break;
                 case "2":
+                    AddOrderWorkflow aow = new AddOrderWorkflow();
+                    aow.Execute();
                     break;
                 case "3":
                     break;
