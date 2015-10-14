@@ -13,6 +13,6 @@ namespace SGCorporation.Models
         public OrderSlip OrderSlip { get; set; }
         public CreateOrderSlip CreateOrderInfo { get; set; }
         public EditSlip EditOrderInfo { get; set; }
-        public RemoveSlip RemoveOrderInfo { get; set; }
+       
     }
 }
