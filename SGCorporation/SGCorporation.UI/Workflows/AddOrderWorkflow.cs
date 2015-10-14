@@ -12,11 +12,9 @@ namespace SGCorporation.UI.Workflows
     {
         public void Execute()
         {
-
             Console.Clear();
 
             OpenOrder();
-            
         }
         public void OpenOrder()
         {
@@ -30,7 +28,7 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine("Order number: {0}", response.CreateOrderInfo.OrderNumber);
                 Console.WriteLine("Customer Name: {0}", response.CreateOrderInfo.CustomerName);
                 Console.WriteLine("State Abbreviation: {0}", response.CreateOrderInfo.StateName);
-                Console.WriteLine("TaxRate: {0}", response.CreateOrderInfo.TaxRate );
+                Console.WriteLine("TaxRate: {0}", response.CreateOrderInfo.TaxRate);
                 Console.WriteLine("Product Type: {0}", response.CreateOrderInfo.ProductType);
                 Console.WriteLine("Area: {0}", response.CreateOrderInfo.Area);
                 Console.WriteLine("Cost Per Square Foot: {0}", response.CreateOrderInfo.CostPerSquareFoot);
@@ -39,6 +37,7 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine("Labor Cost: {0}", response.CreateOrderInfo.LaborCost);
                 Console.WriteLine("Tax: {0}", response.CreateOrderInfo.Tax);
                 Console.WriteLine("Total: {0}", response.CreateOrderInfo.Total);
+                Console.WriteLine();
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
             }

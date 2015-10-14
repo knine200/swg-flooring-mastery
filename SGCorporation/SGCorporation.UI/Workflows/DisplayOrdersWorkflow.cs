@@ -30,7 +30,7 @@ namespace SGCorporation.UI.Workflows
 
             DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-           // DateTime date = Convert.ToDateTime(input).Date;
+            // DateTime date = Convert.ToDateTime(input).Date;
 
             return date;
         }

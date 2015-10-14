@@ -10,7 +10,7 @@ namespace SGCorporation.UI.Workflows
     {
         public void Execute()
         {
-            string input = "";
+            string input;
 
             do
             {

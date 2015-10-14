@@ -31,10 +31,31 @@ namespace SGCorporation.BLL
 
             foreach (var order in orders)
             {
-                Console.WriteLine("OrderNumber: {0}, CustomerName: {1}, Area: {2}, CostPerSquareFoot: {3}, LaborCostPerSquareFoot: {4}, MaterialCost: {5}, LaborCost: {6}, Tax: {7}, Total: {8}", order.OrderNumber, order.CustomerName, order.Area, order.CostPerSquareFoot, order.LaborCostPerSquareFoot, order.MaterialCost, order.LaborCost, order.Tax, order.Total);
-
+                Console.WriteLine("OrderNumber: {0}, " +
+                                  "CustomerName: {1}, " +
+                                  "StateName: {2}" +
+                                  "TaxRate: {3}" +
+                                  "ProductType: {4}" +
+                                  "Area: {5}, " +
+                                  "CostPerSquareFoot: {6}, " +
+                                  "LaborCostPerSquareFoot: {7}, " +
+                                  "MaterialCost: {8}, " +
+                                  "LaborCost: {9}, " +
+                                  "Tax: {10}, " +
+                                  "Total: {11}",
+                                  order.OrderNumber,
+                                  order.CustomerName,
+                                  order.StateName,
+                                  order.TaxRate,
+                                  order.ProductType,
+                                  order.Area,
+                                  order.CostPerSquareFoot,
+                                  order.LaborCostPerSquareFoot,
+                                  order.MaterialCost,
+                                  order.LaborCost,
+                                  order.Tax,
+                                  order.Total);
             }
-
             return response;
         }
 
@@ -63,18 +84,11 @@ namespace SGCorporation.BLL
             Console.Write("Input the LaborCostPerSquareFoot: ");
             string LaborCostPerSquareFoot = Console.ReadLine();
             newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
-            Console.Write("Input the MaterialCost: ");
-            string MaterialCost = Console.ReadLine();
-            newOrder.MaterialCost = decimal.Parse(MaterialCost);
-            Console.Write("Input the LaborCost: ");
-            string LaborCost = Console.ReadLine();
-            newOrder.LaborCost = decimal.Parse(LaborCost);
-            Console.Write("Input the Tax: ");
-            string Tax = Console.ReadLine();
-            newOrder.Tax = decimal.Parse(Tax);
-            Console.Write("Input the Total: ");
-            string Total = Console.ReadLine();
-            newOrder.Total = decimal.Parse(Total);
+
+            newOrder.MaterialCost = newOrder.Area*newOrder.CostPerSquareFoot;
+            newOrder.LaborCost = newOrder.Area*newOrder.LaborCostPerSquareFoot;
+            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost)*newOrder.TaxRate;
+            newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
             int returnedOrderNumber = repo.WriteNewLine(newOrder);
 
@@ -106,7 +120,6 @@ namespace SGCorporation.BLL
             }
 
             return response;
-
         }
 
 
@@ -116,7 +129,6 @@ namespace SGCorporation.BLL
 
             if (Order.OrderNumber > 0)
             {
-
                 var repo = new OrderRepository();
                 repo.EditOrder(OrderDate, Order);
 
@@ -157,7 +169,6 @@ namespace SGCorporation.BLL
             }
             else
             {
-
                 response.Success = false;
                 response.Message = "Your Order number does not exist!";
 
@@ -168,7 +179,6 @@ namespace SGCorporation.BLL
 
         public Order GetOrderNo(DateTime OrderDate, int OrderNo)
         {
-
             var repo = new OrderRepository();
             var order = repo.GetOrder(OrderDate, OrderNo);
 
