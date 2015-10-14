@@ -70,6 +70,36 @@ namespace SGCorporation.Data
             return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
         }
 
+        public void RemoveOrder(DateTime OrderDate, Order OrderToUpdate)
+        {
+            List<Order> orders = GetAllOrders(OrderDate);
+
+            Order order = orders.First(a => a.OrderNumber == OrderToUpdate.OrderNumber);
+            orders.Remove(order);
+
+            OverwriteFile(orders, OrderDate);
+        }
+
+        public void EditOrder(DateTime OrderDate, Order OrderToUpdate)
+        {
+            List<Order> orders = GetAllOrders(OrderDate);
+
+            Order order = orders.First(a => a.OrderNumber == OrderToUpdate.OrderNumber);
+            order.CustomerName = OrderToUpdate.CustomerName;
+            order.StateName = OrderToUpdate.StateName;
+            order.TaxRate = OrderToUpdate.TaxRate;
+            order.ProductType = OrderToUpdate.ProductType;
+            order.Area = OrderToUpdate.Area;
+            order.CostPerSquareFoot = OrderToUpdate.CostPerSquareFoot;
+            order.LaborCostPerSquareFoot = OrderToUpdate.LaborCostPerSquareFoot;
+            order.MaterialCost = OrderToUpdate.MaterialCost;
+            order.LaborCost = OrderToUpdate.LaborCost;
+            order.Tax = OrderToUpdate.Tax;
+            order.Total = OrderToUpdate.Total;
+
+            OverwriteFile(orders, OrderDate);
+        }
+
         public void OverwriteFile(List<Order> orders, DateTime OrderDate)
         {
             string ordersFilePath = GetFilePath(OrderDate);
