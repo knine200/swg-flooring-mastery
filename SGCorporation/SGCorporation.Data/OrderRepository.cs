@@ -60,14 +60,11 @@ namespace SGCorporation.Data
             return orders;
         }
 
-        public Order GetOrder(DateTime OrderDate)
+        public Order GetOrder(DateTime OrderDate, int OrderNo)
         {
             List<Order> orders = GetAllOrders(OrderDate);
 
-            OrderSlip OrderSlip = new OrderSlip();
-
-
-            return orders.FirstOrDefault(x => x.OrderNumber == OrderSlip.Order.OrderNumber);
+            return orders.FirstOrDefault(x => x.OrderNumber == OrderNo);
         }
 
         public void RemoveOrder(DateTime OrderDate, Order OrderToUpdate)
