@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SGCorporation.Models
 {
-    public class OrderSlip
+    public class RemoveSlip
     {
-        public DateTime OrderDate { get; set; }
-        public Order Order { get; set; }
+        public OrderSlip RemoveOrderSlip { get; set; }
     }
 }

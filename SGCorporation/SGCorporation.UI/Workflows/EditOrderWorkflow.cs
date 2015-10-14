@@ -10,7 +10,13 @@ namespace SGCorporation.UI.Workflows
     {
         public void Execute()
         {
+            DisplayOrdersWorkflow dow = new DisplayOrdersWorkflow();
+            dow.Execute();
+
+
             
         }
+
+      
     }
 }

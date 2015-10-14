@@ -108,5 +108,62 @@ namespace SGCorporation.BLL
             return response;
 
         }
+
+
+        public Response EditOrder( DateTime OrderDate, Order Order)
+        {
+            var response = new Response();
+
+            if (Order.OrderNumber > 0)
+            {
+                
+                var repo = new OrderRepository();
+                repo.EditOrder(OrderDate, Order);
+
+                response.Success = true;
+                response.EditOrderInfo = new EditSlip();
+                response.EditOrderInfo.CustomerName = Order.CustomerName;
+                response.EditOrderInfo.StateName = Order.StateName;
+                response.EditOrderInfo.TaxRate = Order.TaxRate;
+                response.EditOrderInfo.Area = Order.Area;
+                response.EditOrderInfo.CostPerSquareFoot = Order.CostPerSquareFoot;
+                response.EditOrderInfo.LaborCostPerSquareFoot = Order.LaborCostPerSquareFoot;
+                response.EditOrderInfo.MaterialCost = Order.MaterialCost;
+                response.EditOrderInfo.LaborCost = Order.LaborCost;
+                response.EditOrderInfo.Tax = Order.Tax;
+                response.EditOrderInfo.Total = Order.Total;
+                response.Message = "You have completed the editing of your Order!";
+
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Your Order does not exist!";
+            }
+
+            return response;
+        }
+
+        public Response RemoveOrder(DateTime OrderDate, Order Order)
+        {
+            var response = new Response();
+
+            if (Order.OrderNumber > 0)
+            {
+                var repo = new OrderRepository();
+                repo.RemoveOrder(OrderDate, Order);
+                response.Success = true;
+                response.Message = "You have deleted your Order!";
+            }
+            else
+            {
+
+                response.Success = false;
+                response.Message = "Your Order number does not exist!";
+
+            }
+
+            return response;
+        }
     }
 }

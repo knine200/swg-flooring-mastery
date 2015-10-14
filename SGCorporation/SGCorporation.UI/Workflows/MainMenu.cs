@@ -52,6 +52,8 @@ namespace SGCorporation.UI.Workflows
                     aow.Execute();
                     break;
                 case "3":
+                    EditOrderWorkflow eow = new EditOrderWorkflow();
+                    eow.Execute();
                     break;
                 case "4":
                     break;
