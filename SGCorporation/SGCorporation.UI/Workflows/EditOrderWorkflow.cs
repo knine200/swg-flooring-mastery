@@ -20,10 +20,10 @@ namespace SGCorporation.UI.Workflows
 
             OrderOperations ops = new OrderOperations();
 
-            var order = ops.GetOrderNo(currentDate, orderNo);
+            Order order = ops.GetOrderNo(currentDate, orderNo);
 
-            order.CustomerName = PromptToEditStrings("CustomerName");
-           
+            order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+
 
             ops.EditOrder(currentDate, order);
 
@@ -52,24 +52,41 @@ namespace SGCorporation.UI.Workflows
             return OrderNo;
         }
 
-        public string PromptToEditStrings(string property)
+        public string PromptToEditStrings(string propertyName, string propertyValue)
         {
-            switch (property)
+            bool confirmation;
+            do
+            {
+                Console.WriteLine("Would you like to edit {0}? (Y/N)", propertyName);
+                string answer = Console.ReadLine();
+
+                if (answer.ToUpper() == "Y")
+                {
+                    confirmation = true;
+                }
+                else
+                {
+                    string reply = "You declined to edit " + propertyName;
+                    return reply;
+                }
+            } while (confirmation != true);
+
+            switch (propertyName)
             {
                 case "CustomerName":
                     Console.WriteLine("Enter a new customer name: ");
-                    return Console.ReadLine();
-                    
+                    string input = Console.ReadLine();
+
+                    if (input == propertyValue)
+                    {
+                        return propertyValue;
+                    }
+                    return input;
                 default:
                     Console.WriteLine("Invalid string");
                     return Console.ReadLine();
-                    
-
-
 
             }
         }
-
-
     }
 }
