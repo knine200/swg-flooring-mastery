@@ -23,6 +23,10 @@ namespace SGCorporation.UI.Workflows
             Order order = ops.GetOrderNo(currentDate, orderNo);
 
             order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+            order.StateName = PromptToEditStrings("StateName", order.StateName);
+            order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
+            order.Area = PromptToEditDecimal("Area", order.Area);
+
 
 
             ops.EditOrder(currentDate, order);
@@ -76,15 +80,103 @@ namespace SGCorporation.UI.Workflows
                 case "CustomerName":
                     Console.WriteLine("Enter a new customer name: ");
                     string input = Console.ReadLine();
+                    decimal inputAmount;
+                    if (decimal.TryParse(input, out inputAmount))
+                    {
+                        Console.WriteLine("Invalid entry");
+                        Console.ReadLine();
+                    }
 
                     if (input == propertyValue)
                     {
                         return propertyValue;
                     }
                     return input;
+                case "StateName":
+                    Console.WriteLine("Enter a new state name: ");
+                    string input1 = Console.ReadLine();
+                    if (decimal.TryParse(input1, out inputAmount))
+                    {
+                        Console.WriteLine("Invalid entry");
+                        Console.ReadLine();
+                    }
+
+                    if (input1 == propertyValue)
+                    {
+                        return propertyValue;
+                    }
+                    return input1;
+                case "ProductType":
+                    Console.WriteLine("Enter a new product type: ");
+                    string input2 = Console.ReadLine();
+                    if (decimal.TryParse(input2, out inputAmount))
+                    {
+                        Console.WriteLine("Invalid entry");
+                        Console.ReadLine();
+                    }
+
+                    if (input2 == propertyValue)
+                    {
+                        return propertyValue;
+                    }
+                    return input2;
+
                 default:
                     Console.WriteLine("Invalid string");
                     return Console.ReadLine();
+
+            }
+
+
+
+        }
+
+        public decimal PromptToEditDecimal(string propertyName, decimal propertyValue)
+        {
+          
+            bool confirmation;
+            do
+            {
+                Console.WriteLine("Would you like to edit {0}? (Y/N)", propertyName);
+                string answer = Console.ReadLine();
+
+                if (answer.ToUpper() == "Y")
+                {
+                    confirmation = true;
+                }
+                else
+                {
+                   Console.WriteLine("You declined to edit {0}", propertyName);
+                    
+                    return 0;
+                }
+            } while (confirmation != true);
+
+            switch (propertyName)
+            {
+                case "Area":
+                    Console.WriteLine("Enter a new area: ");
+                    string input = Console.ReadLine();
+                    decimal inputAmount;
+                    if (decimal.TryParse(input, out inputAmount))
+                    {
+                        if (inputAmount == propertyValue)
+                        {
+                            return propertyValue;
+                        }
+
+                        return inputAmount;
+                    }
+
+                    Console.WriteLine("Invalid entry");
+                    Console.ReadLine();
+
+                    return 0;
+                default:
+                    Console.WriteLine("Invalid entry");
+                    Console.ReadLine();
+                    return 0;
+
 
             }
         }
