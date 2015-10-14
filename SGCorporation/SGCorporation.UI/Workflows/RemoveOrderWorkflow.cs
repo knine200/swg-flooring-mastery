@@ -20,7 +20,7 @@ namespace SGCorporation.UI.Workflows
 
             OrderOperations ops = new OrderOperations();
 
-            var order = ops.GetOrderNo(currentDate, orderNo);
+            Order order = ops.GetOrderNo(currentDate, orderNo);
 
             ops.RemoveOrder(currentDate, order);
 
@@ -32,9 +32,11 @@ namespace SGCorporation.UI.Workflows
             Console.Write("Enter the date for your Order Date (MMDDYYYY): ");
             string input = Console.ReadLine();
 
-
             string format = "MMddyyyy";
-            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            DateTime date = DateTime.ParseExact(input,
+                format,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None);
 
             return date;
         }
@@ -48,7 +50,5 @@ namespace SGCorporation.UI.Workflows
 
             return OrderNo;
         }
-
-
     }
 }

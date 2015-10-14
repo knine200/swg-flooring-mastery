@@ -28,9 +28,10 @@ namespace SGCorporation.UI.Workflows
             string input = Console.ReadLine();
             string format = "MMddyyyy";
 
-            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-            // DateTime date = Convert.ToDateTime(input).Date;
+            DateTime date = DateTime.ParseExact(input,
+                format,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None);
 
             return date;
         }
@@ -40,7 +41,7 @@ namespace SGCorporation.UI.Workflows
             OrderOperations ops = new OrderOperations();
             Response response = ops.GetAllOrders(userDate);
 
-            if (response.Success == true)
+            if (response.Success)
             {
                 Console.WriteLine(response.Message);
                 Console.ReadLine();

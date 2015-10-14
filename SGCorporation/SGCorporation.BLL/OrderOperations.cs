@@ -29,20 +29,20 @@ namespace SGCorporation.BLL
                 response.Message = "You got all the orders for the date";
             }
 
-            foreach (var order in orders)
+            foreach (Order order in orders)
             {
-                Console.WriteLine("OrderNumber: {0}, " +
-                                  "CustomerName: {1}, " +
-                                  "StateName: {2}" +
-                                  "TaxRate: {3}" +
-                                  "ProductType: {4}" +
-                                  "Area: {5}, " +
-                                  "CostPerSquareFoot: {6}, " +
-                                  "LaborCostPerSquareFoot: {7}, " +
-                                  "MaterialCost: {8}, " +
-                                  "LaborCost: {9}, " +
-                                  "Tax: {10}, " +
-                                  "Total: {11}",
+                Console.WriteLine("OrderNumber: {0} " +
+                                  "\nCustomerName: {1} " +
+                                  "\nStateName: {2}" +
+                                  "\nTaxRate: {3}" +
+                                  "\nProductType: {4}" +
+                                  "\nArea: {5} " +
+                                  "\nCostPerSquareFoot: {6} " +
+                                  "\nLaborCostPerSquareFoot: {7} " +
+                                  "\nMaterialCost: {8} " +
+                                  "\nLaborCost: {9} " +
+                                  "\nTax: {10} " +
+                                  "\nTotal: {11}",
                                   order.OrderNumber,
                                   order.CustomerName,
                                   order.StateName,
@@ -85,9 +85,9 @@ namespace SGCorporation.BLL
             string LaborCostPerSquareFoot = Console.ReadLine();
             newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
 
-            newOrder.MaterialCost = newOrder.Area*newOrder.CostPerSquareFoot;
-            newOrder.LaborCost = newOrder.Area*newOrder.LaborCostPerSquareFoot;
-            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost)*newOrder.TaxRate;
+            newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
+            newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
+            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost) * newOrder.TaxRate;
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
             int returnedOrderNumber = repo.WriteNewLine(newOrder);
@@ -125,11 +125,11 @@ namespace SGCorporation.BLL
 
         public Response EditOrder(DateTime OrderDate, Order Order)
         {
-            var response = new Response();
+            Response response = new Response();
 
             if (Order.OrderNumber > 0)
             {
-                var repo = new OrderRepository();
+                OrderRepository repo = new OrderRepository();
                 repo.EditOrder(OrderDate, Order);
 
                 response.Success = true;
@@ -158,11 +158,11 @@ namespace SGCorporation.BLL
 
         public Response RemoveOrder(DateTime OrderDate, Order Order)
         {
-            var response = new Response();
+            Response response = new Response();
 
             if (Order.OrderNumber > 0)
             {
-                var repo = new OrderRepository();
+                OrderRepository repo = new OrderRepository();
                 repo.RemoveOrder(OrderDate, Order);
                 response.Success = true;
                 response.Message = "You have deleted your Order!";
@@ -179,8 +179,8 @@ namespace SGCorporation.BLL
 
         public Order GetOrderNo(DateTime OrderDate, int OrderNo)
         {
-            var repo = new OrderRepository();
-            var order = repo.GetOrder(OrderDate, OrderNo);
+            OrderRepository repo = new OrderRepository();
+            Order order = repo.GetOrder(OrderDate, OrderNo);
 
             return order;
         }

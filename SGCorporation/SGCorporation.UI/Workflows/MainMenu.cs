@@ -34,7 +34,6 @@ namespace SGCorporation.UI.Workflows
                     ProcessChoice(input);
                 }
 
-
             } while (input.ToUpper() != "Q");
 
         }

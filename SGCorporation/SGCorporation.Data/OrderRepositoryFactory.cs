@@ -18,14 +18,12 @@ namespace SGCorporation.Data
             switch (_value)
             {
                 case "Test":
-                    //return new TestOrderRepository();
-                    
+                //return new TestOrderRepository();
+
                 case "Prod":
                     return new OrderRepository();
                 default:
                     throw new Exception(string.Format("{0} not supported!"));
-
-
             }
 
         }
