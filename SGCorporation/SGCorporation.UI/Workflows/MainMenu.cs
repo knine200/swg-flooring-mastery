@@ -56,6 +56,8 @@ namespace SGCorporation.UI.Workflows
                     eow.Execute();
                     break;
                 case "4":
+                    RemoveOrderWorkflow rwf = new RemoveOrderWorkflow();
+                    rwf.Execute();
                     break;
                 default:
                     Console.WriteLine("{0} is an invalid entry!", choice);

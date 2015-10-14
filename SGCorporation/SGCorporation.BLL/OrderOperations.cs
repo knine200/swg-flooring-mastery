@@ -31,8 +31,8 @@ namespace SGCorporation.BLL
 
             foreach (var order in orders)
             {
-                Console.WriteLine("OrderNumber: {0}, CustomerName: {1}, Area: {2}, CostPerSquareFoot: {3}, LaborCostPerSquareFoot: {4}, MaterialCost: {5}, LaborCost: {6}, Tax: {7}, Total: {8}", order.OrderNumber,  order.CustomerName, order.Area,order.CostPerSquareFoot, order.LaborCostPerSquareFoot,  order.MaterialCost, order.LaborCost, order.Tax, order.Total);
-                
+                Console.WriteLine("OrderNumber: {0}, CustomerName: {1}, Area: {2}, CostPerSquareFoot: {3}, LaborCostPerSquareFoot: {4}, MaterialCost: {5}, LaborCost: {6}, Tax: {7}, Total: {8}", order.OrderNumber, order.CustomerName, order.Area, order.CostPerSquareFoot, order.LaborCostPerSquareFoot, order.MaterialCost, order.LaborCost, order.Tax, order.Total);
+
             }
 
             return response;
@@ -110,13 +110,13 @@ namespace SGCorporation.BLL
         }
 
 
-        public Response EditOrder( DateTime OrderDate, Order Order)
+        public Response EditOrder(DateTime OrderDate, Order Order)
         {
             var response = new Response();
 
             if (Order.OrderNumber > 0)
             {
-                
+
                 var repo = new OrderRepository();
                 repo.EditOrder(OrderDate, Order);
 
@@ -164,6 +164,15 @@ namespace SGCorporation.BLL
             }
 
             return response;
+        }
+
+        public Order GetOrderNo(DateTime OrderDate, int OrderNo)
+        {
+
+            var repo = new OrderRepository();
+            var order = repo.GetOrder(OrderDate, OrderNo);
+
+            return order;
         }
     }
 }
