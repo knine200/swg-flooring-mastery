@@ -1,0 +1,6 @@
+﻿OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+6,Michael,PA,6.75,Laminate,100.00,1.75,2.10,175.00,210.00,25.99,385.00
+7,John,MI,5.75,Tile,100.00,3.50,4.15,350.00,415.00,43.99,765.00
+8,Ryo,IN,6.00,Carpet,100.00,2.25,2.10,225.00,210.00,26.10,435.00
+9,Koshin,OH,6.25,Laminate,100.00,1.75,2.10,175.00,210.00,24.06,385.00
+10,Jim,MI,5.75,Carpet,100.00,2.25,2.10,225.00,210.00,25.01,435.00

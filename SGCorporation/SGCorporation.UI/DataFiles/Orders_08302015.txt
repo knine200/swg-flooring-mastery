@@ -1,0 +1,4 @@
+﻿OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+11,Musa,PA,6.75,Wood,100.00,5.15,4.75,515.00,475.00,66.83,990.00
+12,Lebron,MI,5.75,Tile,100.00,3.50,4.15,350.00,415.00,43.99,765.00
+13,Sandy,IN,6.00,Carpet,100.00,2.25,2.10,225.00,210.00,26.10,435.00
