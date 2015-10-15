@@ -24,16 +24,19 @@ namespace SGCorporation.UI.Workflows
         {
 
             Console.Clear();
-            Console.Write("Enter the date for your order (MMDDYYYY): ");
+            Console.Write("Enter the date for your order (MM/DD/YYYY): ");
+
             string input = Console.ReadLine();
-            string format = "MMddyyyy";
+            DateTime correctDate = DateTime.Parse(input);
 
-            DateTime date = DateTime.ParseExact(input,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
+            //string format = "MMddyyyy";
 
-            return date;
+            //DateTime date = DateTime.ParseExact(input,
+            //    format,
+            //    CultureInfo.InvariantCulture,
+            //    DateTimeStyles.None);
+
+            return correctDate.Date;
         }
 
         public void DisplayOrderInformation(DateTime userDate)

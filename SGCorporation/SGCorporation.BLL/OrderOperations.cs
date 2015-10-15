@@ -14,11 +14,13 @@ namespace SGCorporation.BLL
     {
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
+        public OrderRepositoryFactory factory;
 
         public OrderOperations()
         {
             TaxRepo = new TaxRepository();
             ProductRepo = new ProductRepository();
+            factory = new OrderRepositoryFactory();
 
         }
 
@@ -42,6 +44,9 @@ namespace SGCorporation.BLL
 
             foreach (Order order in orders)
             {
+                Console.WriteLine();
+                
+                
                 Console.WriteLine("OrderNumber: {0} " +
                                   "\nCustomerName: {1} " +
                                   "\nStateName: {2}" +
@@ -66,6 +71,8 @@ namespace SGCorporation.BLL
                                   order.LaborCost,
                                   order.Tax,
                                   order.Total);
+                Console.WriteLine();
+
             }
             return response;
         }
@@ -102,12 +109,7 @@ namespace SGCorporation.BLL
             newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
             newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
-            //Console.Write("Input the CostPerSquareFoot: ");
-            //string CostPerSquareFoot = Console.ReadLine();
-            //newOrder.CostPerSquareFoot = decimal.Parse(CostPerSquareFoot);
-            //Console.Write("Input the LaborCostPerSquareFoot: ");
-            //string LaborCostPerSquareFoot = Console.ReadLine();
-            //newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
+            
 
             newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
             newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
@@ -171,31 +173,7 @@ namespace SGCorporation.BLL
                     response.CreateOrderInfo.Tax = newOrder.Tax;
                     response.CreateOrderInfo.Total = newOrder.Total;
                 }
-            }
-
-            //int returnedOrderNumber = repo.WriteNewLine(newOrder);
-
-            //string input = "01012016";
-            //string format = "MMddyyyy";
-            //DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-            //if (returnedOrderNumber == repo.GetAllOrders(date).Count)
-            //{
-            //    response.Success = true;
-            //    response.CreateOrderInfo = new CreateOrderSlip();
-            //    response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
-            //    response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
-            //    response.CreateOrderInfo.StateName = newOrder.StateName;
-            //    response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
-            //    response.CreateOrderInfo.ProductType = newOrder.ProductType;
-            //    response.CreateOrderInfo.Area = newOrder.Area;
-            //    response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
-            //    response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
-            //    response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
-            //    response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
-            //    response.CreateOrderInfo.Tax = newOrder.Tax;
-            //    response.CreateOrderInfo.Total = newOrder.Total;
-            //}
+            }          
             else
             {
                 response.Success = false;

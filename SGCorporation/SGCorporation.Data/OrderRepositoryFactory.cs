@@ -17,9 +17,9 @@ namespace SGCorporation.Data
 
             switch (_value)
             {
-                case "Test":
-                //return new TestOrderRepository();
-
+                //case "Test":
+                // return new TestRepository();
+                    
                 case "Prod":
                     return new OrderRepository();
                 default:
