@@ -43,6 +43,8 @@
     <Compile Include="CreateOrderSlip.cs" />
     <Compile Include="EditSlip.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderSlip.cs" />
     <Compile Include="Product.cs" />
