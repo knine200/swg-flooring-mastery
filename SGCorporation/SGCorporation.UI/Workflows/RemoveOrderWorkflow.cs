@@ -20,7 +20,7 @@ namespace SGCorporation.UI.Workflows
 
             OrderOperations ops = new OrderOperations();
 
-            Order order = ops.GetOrderNo(currentDate, orderNo);
+            Order orderToRemove = ops.GetOrderNo(currentDate, orderNo);
 
             Console.WriteLine();
             Console.WriteLine("OrderNumber: {0} " +
@@ -35,29 +35,32 @@ namespace SGCorporation.UI.Workflows
                                   "\nLaborCost: {9:c} " +
                                   "\nTax: {10:c} " +
                                   "\nTotal: {11:c}",
-                                  order.OrderNumber,
-                                  order.CustomerName,
-                                  order.StateName,
-                                  order.TaxRate,
-                                  order.ProductType,
-                                  order.Area,
-                                  order.CostPerSquareFoot,
-                                  order.LaborCostPerSquareFoot,
-                                  order.MaterialCost,
-                                  order.LaborCost,
-                                  order.Tax,
-                                  order.Total);
+                                  orderToRemove.OrderNumber,
+                                  orderToRemove.CustomerName,
+                                  orderToRemove.StateName,
+                                  orderToRemove.TaxRate,
+                                  orderToRemove.ProductType,
+                                  orderToRemove.Area,
+                                  orderToRemove.CostPerSquareFoot,
+                                  orderToRemove.LaborCostPerSquareFoot,
+                                  orderToRemove.MaterialCost,
+                                  orderToRemove.LaborCost,
+                                  orderToRemove.Tax,
+                                  orderToRemove.Total);
 
             Console.WriteLine();
-            Console.Write("Are you sure you want to remove the above order? (Y/N) ");
+            Console.Write("Are you sure you want to remove the above order? (Y/N)  ");
             string response = Console.ReadLine();
 
             if (response.ToUpper() == "Y")
             {
-                ops.RemoveOrder(currentDate, order);
+                ops.RemoveOrder(currentDate, orderToRemove);
                 Console.WriteLine("The order has been removed");
             }
-            
+            else
+            {
+                Console.WriteLine("Remove order cancelled!");
+            }
 
             Console.ReadLine();
         }
@@ -81,7 +84,18 @@ namespace SGCorporation.UI.Workflows
             Console.Write("Enter the order number: ");
             string input = Console.ReadLine();
 
-            int OrderNo = int.Parse(input);
+            int OrderNo;
+            if (int.TryParse(input, out OrderNo))
+            {
+                return OrderNo;
+            }
+            else
+            {
+                Console.WriteLine("Try again");
+                Console.ReadLine();
+            }
+
+            //int OrderNo = int.Parse(input);
 
             return OrderNo;
         }

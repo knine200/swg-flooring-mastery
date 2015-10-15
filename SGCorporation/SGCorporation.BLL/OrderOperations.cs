@@ -14,13 +14,13 @@ namespace SGCorporation.BLL
     {
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
-        public OrderRepositoryFactory factory;
+        //public OrderRepositoryFactory factory;
 
         public OrderOperations()
         {
             TaxRepo = new TaxRepository();
             ProductRepo = new ProductRepository();
-            factory = new OrderRepositoryFactory();
+            //factory = new OrderRepositoryFactory();
 
         }
 
