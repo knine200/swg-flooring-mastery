@@ -12,8 +12,15 @@ namespace SGCorporation.BLL
 {
     public class OrderOperations
     {
-        public TaxRepository taxRepo;
-        public ProductRepository productRepo;
+        public TaxRepository TaxRepo;
+        public ProductRepository ProductRepo;
+
+        public OrderOperations()
+        {
+            TaxRepo = new TaxRepository();
+            ProductRepo = new ProductRepository();
+
+        }
 
         public Response GetAllOrders(DateTime OrderDate)
         {
@@ -68,8 +75,8 @@ namespace SGCorporation.BLL
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
             Order newOrder = new Order();
-            TaxRepository taxRepo = new TaxRepository();
-            ProductRepository productRepo = new ProductRepository();
+           
+          
 
             newOrder.OrderNumber = 1;
             Console.Write("Input the Customer Name: ");
@@ -77,14 +84,14 @@ namespace SGCorporation.BLL
             Console.Write("Input the State Abbreviation: ");
             string stateName = Console.ReadLine();
             newOrder.StateName = stateName.ToUpper();
-            Tax stateTaxObject = taxRepo.GetTax(stateName.ToUpper());
+            Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
             newOrder.TaxRate = stateTaxObject.TaxRate / 100;
             
             
             Console.Write("Input the Product Type: ");
             string productType = Console.ReadLine();
             
-            Product ProductTypeObject = productRepo.GetProduct(UppercaseFirst(productType));
+            Product ProductTypeObject = ProductRepo.GetProduct(UppercaseFirst(productType));
             newOrder.ProductType = UppercaseFirst(productType);
 
             Console.Write("Input the Area: ");
@@ -215,9 +222,18 @@ namespace SGCorporation.BLL
 
         public Tax ReturnTax(string stateName)
         {
-            Tax stateTaxObject = taxRepo.GetTax(stateName.ToUpper());
-           
+            Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
+
             return stateTaxObject;
+
+        }
+
+        public Product ReturnProduct(string productName)
+        {
+            Product stateProductObject = ProductRepo.GetProduct(UppercaseFirst(productName));
+
+            return stateProductObject;
+
         }
 
     }

@@ -11,6 +11,13 @@ namespace SGCorporation.UI.Workflows
 {
     public class EditOrderWorkflow
     {
+        public OrderOperations ops;
+
+        public EditOrderWorkflow()
+        {
+            ops = new OrderOperations();
+        }
+
         public void Execute()
         {
             Console.Clear();
@@ -18,31 +25,32 @@ namespace SGCorporation.UI.Workflows
             DateTime currentDate = PromptForDate();
             int orderNo = PromptForOrderNo();
 
-            OrderOperations ops = new OrderOperations();
+            
 
             Order order = ops.GetOrderNo(currentDate, orderNo);
 
-            order.CustomerName = PromptToEditStrings("Customer Name", order.CustomerName);
+            order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
             order.StateName = PromptToEditStrings("StateName", order.StateName);
             string stateName = order.StateName;
 
             Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
             order.TaxRate = currentStateTax.TaxRate;
 
-            //Tax stateTaxObject = ops.taxRepo.GetTax(stateName.ToUpper());
-            //order.TaxRate = stateTaxObject.TaxRate / 100;
+         
+            order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
 
-            //order.TaxRate = PromptToEditDecimal("Tax Rate", order.TaxRate);
-            order.ProductType = PromptToEditStrings("Product Type", order.ProductType);
-            order.Area = PromptToEditDecimal("Area", order.Area);
+          
 
             string productType = order.ProductType;
-            Product ProductTypeObject = ops.productRepo.GetProduct(productType);
-            order.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
-            order.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
+            Product currentProduct = ops.ReturnProduct(productType);
 
-            //order.CostPerSquareFoot = PromptToEditDecimal("Cost Per Square Foot", order.CostPerSquareFoot);
-            //order.LaborCostPerSquareFoot = PromptToEditDecimal("Labor Cost Per Square Foot", order.LaborCostPerSquareFoot);
+            order.CostPerSquareFoot = currentProduct.CostPerSquareFoot;
+
+            order.LaborCostPerSquareFoot = currentProduct.LaborCostPerSquareFoot;
+
+            order.Area = PromptToEditDecimal("Area", order.Area);
+
+
 
             order.MaterialCost = order.Area * order.CostPerSquareFoot;
             order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
@@ -51,6 +59,7 @@ namespace SGCorporation.UI.Workflows
 
             ops.EditOrder(currentDate, order);
         }
+
         public DateTime PromptForDate()
         {
             Console.Write("Enter the date for your Order Date (MMDDYYYY): ");
@@ -108,6 +117,7 @@ namespace SGCorporation.UI.Workflows
                         return propertyValue;
                     }
                     return input.ToUpper();
+
                 case "StateName":
                     Console.WriteLine("Enter a new {0}: ", propertyName);
                     string input1 = Console.ReadLine();
@@ -122,24 +132,31 @@ namespace SGCorporation.UI.Workflows
                         return propertyValue;
                     }
                     return input1;
+
                 case "ProductType":
                     Console.WriteLine("Enter a new {0}: ", propertyName);
                     string input2 = Console.ReadLine();
-                    if (decimal.TryParse(input2, out inputAmount))
+
+                    string input3 = ops.UppercaseFirst(input2);
+
+                    if (decimal.TryParse(input3, out inputAmount))
                     {
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
                     }
 
-                    if (input2 == propertyValue)
+                    if (input3 == propertyValue)
                     {
                         return propertyValue;
                     }
-                    return input2;
+                    return input3;
+
 
                 default:
                     Console.WriteLine("Invalid string");
                     return Console.ReadLine();
+
+
             }
         }
 
@@ -163,6 +180,8 @@ namespace SGCorporation.UI.Workflows
                 }
             } while (confirmation != true);
 
+
+
             switch (propertyName)
             {
                 case "Area":
@@ -180,60 +199,14 @@ namespace SGCorporation.UI.Workflows
                     }
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
-                    return 0;
-                case "CostPerSquareFoot":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
-                    string input1 = Console.ReadLine();
-                    decimal inputAmount1;
-                    if (decimal.TryParse(input1, out inputAmount1))
-                    {
-                        if (inputAmount1 == propertyValue)
-                        {
-                            return propertyValue;
-                        }
-
-                        return inputAmount1;
-                    }
-                    Console.WriteLine("Invalid entry");
-                    Console.ReadLine();
-                    return 0;
-                case "LaborCostPerSquareFoot":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
-                    string input2 = Console.ReadLine();
-                    decimal inputAmount2;
-                    if (decimal.TryParse(input2, out inputAmount2))
-                    {
-                        if (inputAmount2 == propertyValue)
-                        {
-                            return propertyValue;
-                        }
-
-                        return inputAmount2;
-                    }
-                    Console.WriteLine("Invalid entry");
-                    Console.ReadLine();
-                    return 0;
-                case "TaxRate":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
-                    string input3 = Console.ReadLine();
-                    decimal inputAmount3;
-                    if (decimal.TryParse(input3, out inputAmount3))
-                    {
-                        if (inputAmount3 == propertyValue)
-                        {
-                            return propertyValue;
-                        }
-
-                        return inputAmount3;
-                    }
-                    Console.WriteLine("Invalid entry");
-                    Console.ReadLine();
-                    return 0;
+                    return 0;               
                 default:
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
                     return 0;
             }
+
+
         }
     }
 }
