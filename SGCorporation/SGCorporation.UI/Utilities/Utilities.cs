@@ -8,6 +8,6 @@ namespace SGCorporation.UI.Utilities
 {
     public class Utilities
     {
-     
+        
     }
 }

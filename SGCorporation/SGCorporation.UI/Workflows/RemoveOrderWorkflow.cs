@@ -22,7 +22,42 @@ namespace SGCorporation.UI.Workflows
 
             Order order = ops.GetOrderNo(currentDate, orderNo);
 
-            ops.RemoveOrder(currentDate, order);
+            Console.WriteLine();
+            Console.WriteLine("OrderNumber: {0} " +
+                                  "\nCustomerName: {1} " +
+                                  "\nStateName: {2}" +
+                                  "\nTaxRate: {3}" +
+                                  "\nProductType: {4}" +
+                                  "\nArea: {5} " +
+                                  "\nCostPerSquareFoot: {6:c} " +
+                                  "\nLaborCostPerSquareFoot: {7:c} " +
+                                  "\nMaterialCost: {8:c} " +
+                                  "\nLaborCost: {9:c} " +
+                                  "\nTax: {10:c} " +
+                                  "\nTotal: {11:c}",
+                                  order.OrderNumber,
+                                  order.CustomerName,
+                                  order.StateName,
+                                  order.TaxRate,
+                                  order.ProductType,
+                                  order.Area,
+                                  order.CostPerSquareFoot,
+                                  order.LaborCostPerSquareFoot,
+                                  order.MaterialCost,
+                                  order.LaborCost,
+                                  order.Tax,
+                                  order.Total);
+
+            Console.WriteLine();
+            Console.Write("Are you sure you want to remove the above order? (Y/N) ");
+            string response = Console.ReadLine();
+
+            if (response.ToUpper() == "Y")
+            {
+                ops.RemoveOrder(currentDate, order);
+                Console.WriteLine("The order has been removed");
+            }
+            
 
             Console.ReadLine();
         }

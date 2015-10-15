@@ -86,7 +86,7 @@ namespace SGCorporation.UI.Workflows
             bool confirmation;
             do
             {
-                Console.WriteLine("Would you like to edit {0}? (Y/N)", propertyName);
+                Console.Write("Would you like to edit {0}? (Y/N)", propertyName);
                 string answer = Console.ReadLine();
 
                 if (answer.ToUpper() == "Y")
@@ -103,7 +103,7 @@ namespace SGCorporation.UI.Workflows
             switch (propertyName)
             {
                 case "CustomerName":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
+                    Console.Write("Enter a new {0}: ", propertyName);
                     string input = Console.ReadLine();
                     decimal inputAmount;
                     if (decimal.TryParse(input, out inputAmount))
@@ -119,7 +119,7 @@ namespace SGCorporation.UI.Workflows
                     return input.ToUpper();
 
                 case "StateName":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
+                    Console.Write("Enter a new {0}: ", propertyName);
                     string input1 = Console.ReadLine();
                     if (decimal.TryParse(input1, out inputAmount))
                     {
@@ -134,7 +134,7 @@ namespace SGCorporation.UI.Workflows
                     return input1;
 
                 case "ProductType":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
+                    Console.Write("Enter a new {0}: ", propertyName);
                     string input2 = Console.ReadLine();
 
                     string input3 = ops.UppercaseFirst(input2);
@@ -165,7 +165,7 @@ namespace SGCorporation.UI.Workflows
             bool confirmation;
             do
             {
-                Console.WriteLine("Would you like to edit {0}? (Y/N)", propertyName);
+                Console.Write("Would you like to edit {0}? (Y/N)", propertyName);
                 string answer = Console.ReadLine();
 
                 if (answer.ToUpper() == "Y")
@@ -185,7 +185,7 @@ namespace SGCorporation.UI.Workflows
             switch (propertyName)
             {
                 case "Area":
-                    Console.WriteLine("Enter a new {0}: ", propertyName);
+                    Console.Write("Enter a new {0}: ", propertyName);
                     string input = Console.ReadLine();
                     decimal inputAmount;
                     if (decimal.TryParse(input, out inputAmount))

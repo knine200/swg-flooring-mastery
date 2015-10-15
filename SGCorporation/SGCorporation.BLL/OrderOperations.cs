@@ -48,12 +48,12 @@ namespace SGCorporation.BLL
                                   "\nTaxRate: {3}" +
                                   "\nProductType: {4}" +
                                   "\nArea: {5} " +
-                                  "\nCostPerSquareFoot: {6} " +
-                                  "\nLaborCostPerSquareFoot: {7} " +
-                                  "\nMaterialCost: {8} " +
-                                  "\nLaborCost: {9} " +
-                                  "\nTax: {10} " +
-                                  "\nTotal: {11}",
+                                  "\nCostPerSquareFoot: {6:c} " +
+                                  "\nLaborCostPerSquareFoot: {7:c} " +
+                                  "\nMaterialCost: {8:c} " +
+                                  "\nLaborCost: {9:c} " +
+                                  "\nTax: {10:c} " +
+                                  "\nTotal: {11:c}",
                                   order.OrderNumber,
                                   order.CustomerName,
                                   order.StateName,
@@ -81,6 +81,7 @@ namespace SGCorporation.BLL
             newOrder.OrderNumber = 1;
             Console.Write("Input the Customer Name: ");
             newOrder.CustomerName = Console.ReadLine();
+
             Console.Write("Input the State Abbreviation: ");
             string stateName = Console.ReadLine();
             newOrder.StateName = stateName.ToUpper();
@@ -113,33 +114,92 @@ namespace SGCorporation.BLL
             newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost) * newOrder.TaxRate;
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
-            int returnedOrderNumber = repo.WriteNewLine(newOrder);
+            Console.WriteLine();
+            Console.WriteLine("OrderNumber: {0} " +
+                                  "\nCustomerName: {1} " +
+                                  "\nStateName: {2}" +
+                                  "\nTaxRate: {3}" +
+                                  "\nProductType: {4}" +
+                                  "\nArea: {5} " +
+                                  "\nCostPerSquareFoot: {6:c} " +
+                                  "\nLaborCostPerSquareFoot: {7:c} " +
+                                  "\nMaterialCost: {8:c} " +
+                                  "\nLaborCost: {9:c} " +
+                                  "\nTax: {10:c} " +
+                                  "\nTotal: {11:c}",
+                                  newOrder.OrderNumber,
+                                  newOrder.CustomerName,
+                                  newOrder.StateName,
+                                  newOrder.TaxRate,
+                                  newOrder.ProductType,
+                                  newOrder.Area,
+                                  newOrder.CostPerSquareFoot,
+                                  newOrder.LaborCostPerSquareFoot,
+                                  newOrder.MaterialCost,
+                                  newOrder.LaborCost,
+                                  newOrder.Tax,
+                                  newOrder.Total);
 
-            string input = "01012016";
-            string format = "MMddyyyy";
-            DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            Console.WriteLine();
 
-            if (returnedOrderNumber == repo.GetAllOrders(date).Count)
+            Console.WriteLine();
+            Console.WriteLine("Please confirm your order creation? (Y/N) ");
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToUpper() == "Y")
             {
-                response.Success = true;
-                response.CreateOrderInfo = new CreateOrderSlip();
-                response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
-                response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
-                response.CreateOrderInfo.StateName = newOrder.StateName;
-                response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
-                response.CreateOrderInfo.ProductType = newOrder.ProductType;
-                response.CreateOrderInfo.Area = newOrder.Area;
-                response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
-                response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
-                response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
-                response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
-                response.CreateOrderInfo.Tax = newOrder.Tax;
-                response.CreateOrderInfo.Total = newOrder.Total;
+                int returnedOrderNumber = repo.WriteNewLine(newOrder);
+
+                string input = "01012016";
+                string format = "MMddyyyy";
+                DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                if (returnedOrderNumber == repo.GetAllOrders(date).Count)
+                {
+                    response.Success = true;
+                    response.CreateOrderInfo = new CreateOrderSlip();
+                    response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
+                    response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
+                    response.CreateOrderInfo.StateName = newOrder.StateName;
+                    response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
+                    response.CreateOrderInfo.ProductType = newOrder.ProductType;
+                    response.CreateOrderInfo.Area = newOrder.Area;
+                    response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
+                    response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
+                    response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
+                    response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
+                    response.CreateOrderInfo.Tax = newOrder.Tax;
+                    response.CreateOrderInfo.Total = newOrder.Total;
+                }
             }
+
+            //int returnedOrderNumber = repo.WriteNewLine(newOrder);
+
+            //string input = "01012016";
+            //string format = "MMddyyyy";
+            //DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+            //if (returnedOrderNumber == repo.GetAllOrders(date).Count)
+            //{
+            //    response.Success = true;
+            //    response.CreateOrderInfo = new CreateOrderSlip();
+            //    response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
+            //    response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
+            //    response.CreateOrderInfo.StateName = newOrder.StateName;
+            //    response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
+            //    response.CreateOrderInfo.ProductType = newOrder.ProductType;
+            //    response.CreateOrderInfo.Area = newOrder.Area;
+            //    response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
+            //    response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
+            //    response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
+            //    response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
+            //    response.CreateOrderInfo.Tax = newOrder.Tax;
+            //    response.CreateOrderInfo.Total = newOrder.Total;
+            //}
             else
             {
                 response.Success = false;
-                response.Message = "Order creation failed. Please try again.";
+                response.Message = "Order creation cancelled";
             }
 
             return response;
