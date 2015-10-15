@@ -26,8 +26,11 @@ namespace SGCorporation.UI.Workflows
             order.StateName = PromptToEditStrings("StateName", order.StateName);
             string stateName = order.StateName;
 
-            Tax stateTaxObject = ops.taxRepo.GetTax(stateName.ToUpper());
-            order.TaxRate = stateTaxObject.TaxRate / 100;
+            Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
+            order.TaxRate = currentStateTax.TaxRate;
+
+            //Tax stateTaxObject = ops.taxRepo.GetTax(stateName.ToUpper());
+            //order.TaxRate = stateTaxObject.TaxRate / 100;
 
             //order.TaxRate = PromptToEditDecimal("Tax Rate", order.TaxRate);
             order.ProductType = PromptToEditStrings("Product Type", order.ProductType);

@@ -213,6 +213,12 @@ namespace SGCorporation.BLL
             return char.ToUpper(s[0]) + s.Substring(1);
         }
 
+        public Tax ReturnTax(string stateName)
+        {
+            Tax stateTaxObject = taxRepo.GetTax(stateName.ToUpper());
+           
+            return stateTaxObject;
+        }
 
     }
 }
