@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SGCorporation.Data;
 using SGCorporation.Models;
 
+
 namespace SGCorporation.BLL
 {
     public class OrderOperations
@@ -64,26 +65,41 @@ namespace SGCorporation.BLL
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
             Order newOrder = new Order();
+            TaxRepository taxRepo = new TaxRepository();
+            ProductRepository productRepo = new ProductRepository();
 
             newOrder.OrderNumber = 1;
             Console.Write("Input the Customer Name: ");
             newOrder.CustomerName = Console.ReadLine();
             Console.Write("Input the State Abbreviation: ");
-            newOrder.StateName = Console.ReadLine();
-            Console.Write("Input the Tax Rate: ");
-            string TaxRate = Console.ReadLine();
-            newOrder.TaxRate = decimal.Parse(TaxRate);
+            string stateName = Console.ReadLine();
+            newOrder.StateName = stateName.ToUpper();
+            Tax stateTaxObject = taxRepo.GetTax(stateName.ToUpper());
+            newOrder.TaxRate = stateTaxObject.TaxRate;
+            
+            
             Console.Write("Input the Product Type: ");
-            newOrder.ProductType = Console.ReadLine();
+            string productType = Console.ReadLine();
+            
+            Product stateProductObject = productRepo.GetProduct(UppercaseFirst(productType));
+            newOrder.ProductType = UppercaseFirst(productType);
+
             Console.Write("Input the Area: ");
             string Area = Console.ReadLine();
             newOrder.Area = decimal.Parse(Area);
-            Console.Write("Input the CostPerSquareFoot: ");
-            string CostPerSquareFoot = Console.ReadLine();
-            newOrder.CostPerSquareFoot = decimal.Parse(CostPerSquareFoot);
-            Console.Write("Input the LaborCostPerSquareFoot: ");
-            string LaborCostPerSquareFoot = Console.ReadLine();
-            newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
+
+            newOrder.CostPerSquareFoot = stateProductObject.CostPerSquareFoot;
+            newOrder.LaborCostPerSquareFoot = stateProductObject.LaborCostPerSquareFoot;
+
+            //Console.Write("Input the CostPerSquareFoot: ");
+            //string CostPerSquareFoot = Console.ReadLine();
+            //newOrder.CostPerSquareFoot = decimal.Parse(CostPerSquareFoot);
+            //Console.Write("Input the LaborCostPerSquareFoot: ");
+            //string LaborCostPerSquareFoot = Console.ReadLine();
+            //newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
+
+
+
 
             newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
             newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
@@ -184,5 +200,18 @@ namespace SGCorporation.BLL
 
             return order;
         }
+
+        public string UppercaseFirst(string s)
+        {
+            // Check for empty string.
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            // Return char and concat substring.
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
+
+
     }
 }

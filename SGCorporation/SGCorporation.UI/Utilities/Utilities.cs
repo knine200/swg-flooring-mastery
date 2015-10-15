@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SGCorporation.UI.Utilities
 {
-    public static class Utilities
+    public class Utilities
     {
-
+     
     }
 }
