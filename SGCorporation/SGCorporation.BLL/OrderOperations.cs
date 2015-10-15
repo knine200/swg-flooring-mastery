@@ -75,21 +75,21 @@ namespace SGCorporation.BLL
             string stateName = Console.ReadLine();
             newOrder.StateName = stateName.ToUpper();
             Tax stateTaxObject = taxRepo.GetTax(stateName.ToUpper());
-            newOrder.TaxRate = stateTaxObject.TaxRate;
+            newOrder.TaxRate = stateTaxObject.TaxRate / 100;
             
             
             Console.Write("Input the Product Type: ");
             string productType = Console.ReadLine();
             
-            Product stateProductObject = productRepo.GetProduct(UppercaseFirst(productType));
+            Product ProductTypeObject = productRepo.GetProduct(UppercaseFirst(productType));
             newOrder.ProductType = UppercaseFirst(productType);
 
             Console.Write("Input the Area: ");
             string Area = Console.ReadLine();
             newOrder.Area = decimal.Parse(Area);
 
-            newOrder.CostPerSquareFoot = stateProductObject.CostPerSquareFoot;
-            newOrder.LaborCostPerSquareFoot = stateProductObject.LaborCostPerSquareFoot;
+            newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
+            newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
             //Console.Write("Input the CostPerSquareFoot: ");
             //string CostPerSquareFoot = Console.ReadLine();
@@ -97,9 +97,6 @@ namespace SGCorporation.BLL
             //Console.Write("Input the LaborCostPerSquareFoot: ");
             //string LaborCostPerSquareFoot = Console.ReadLine();
             //newOrder.LaborCostPerSquareFoot = decimal.Parse(LaborCostPerSquareFoot);
-
-
-
 
             newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
             newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;

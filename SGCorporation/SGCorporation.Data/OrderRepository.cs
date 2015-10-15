@@ -130,6 +130,7 @@ namespace SGCorporation.Data
             DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
 
             List<Order> orders = GetAllOrders(date);
+
             int newOrderNo = orders.Max(a => a.OrderNumber) + 1;
 
             using (StreamWriter writer = File.AppendText(GetFilePath(date)))
