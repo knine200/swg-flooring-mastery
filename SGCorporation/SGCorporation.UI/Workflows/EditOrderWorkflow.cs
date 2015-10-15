@@ -24,11 +24,22 @@ namespace SGCorporation.UI.Workflows
 
             order.CustomerName = PromptToEditStrings("Customer Name", order.CustomerName);
             order.StateName = PromptToEditStrings("StateName", order.StateName);
-            order.TaxRate = PromptToEditDecimal("Tax Rate", order.TaxRate);
+            string stateName = order.StateName;
+
+            Tax stateTaxObject = ops.taxRepo.GetTax(stateName.ToUpper());
+            order.TaxRate = stateTaxObject.TaxRate / 100;
+
+            //order.TaxRate = PromptToEditDecimal("Tax Rate", order.TaxRate);
             order.ProductType = PromptToEditStrings("Product Type", order.ProductType);
             order.Area = PromptToEditDecimal("Area", order.Area);
-            order.CostPerSquareFoot = PromptToEditDecimal("Cost Per Square Foot", order.CostPerSquareFoot);
-            order.LaborCostPerSquareFoot = PromptToEditDecimal("Labor Cost Per Square Foot", order.LaborCostPerSquareFoot);
+
+            string productType = order.ProductType;
+            Product ProductTypeObject = ops.productRepo.GetProduct(productType);
+            order.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
+            order.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
+
+            //order.CostPerSquareFoot = PromptToEditDecimal("Cost Per Square Foot", order.CostPerSquareFoot);
+            //order.LaborCostPerSquareFoot = PromptToEditDecimal("Labor Cost Per Square Foot", order.LaborCostPerSquareFoot);
 
             order.MaterialCost = order.Area * order.CostPerSquareFoot;
             order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
@@ -93,7 +104,7 @@ namespace SGCorporation.UI.Workflows
                     {
                         return propertyValue;
                     }
-                    return input;
+                    return input.ToUpper();
                 case "StateName":
                     Console.WriteLine("Enter a new {0}: ", propertyName);
                     string input1 = Console.ReadLine();

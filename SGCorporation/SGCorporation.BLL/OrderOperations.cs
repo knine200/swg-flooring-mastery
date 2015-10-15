@@ -12,6 +12,9 @@ namespace SGCorporation.BLL
 {
     public class OrderOperations
     {
+        public TaxRepository taxRepo;
+        public ProductRepository productRepo;
+
         public Response GetAllOrders(DateTime OrderDate)
         {
             OrderRepository repo = new OrderRepository();
@@ -143,6 +146,7 @@ namespace SGCorporation.BLL
             if (Order.OrderNumber > 0)
             {
                 OrderRepository repo = new OrderRepository();
+
                 repo.EditOrder(OrderDate, Order);
 
                 response.Success = true;
