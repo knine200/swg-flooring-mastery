@@ -14,13 +14,21 @@ namespace SGCorporation.UI.Workflows
         public void Execute()
         {
             Console.Clear();
+            OrderOperations ops = new OrderOperations();
+            Order orderToRemove = new Order();
 
             DateTime currentDate = PromptForDate();
-            int orderNo = PromptForOrderNo();
 
-            OrderOperations ops = new OrderOperations();
-
-            Order orderToRemove = ops.GetOrderNo(currentDate, orderNo);
+            do
+            {
+                int orderNo = PromptForOrderNo();
+                orderToRemove = ops.GetOrderNo(currentDate, orderNo);
+                if (orderToRemove == null)
+                {
+                    Console.WriteLine("That order number does not exist. Try again.");
+                    Console.WriteLine();
+                }
+            } while (orderToRemove == null);
 
             Console.WriteLine();
             Console.WriteLine("OrderNumber: {0} " +

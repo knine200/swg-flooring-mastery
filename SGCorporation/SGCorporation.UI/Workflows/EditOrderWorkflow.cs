@@ -24,13 +24,19 @@ namespace SGCorporation.UI.Workflows
         public void Execute()
         {
             Console.Clear();
-
+            Order order = new Order();
             DateTime currentDate = PromptForDate();
-            int orderNo = PromptForOrderNo();
+            do
+            {
+                int orderNo = PromptForOrderNo();
+                order = ops.GetOrderNo(currentDate, orderNo);
 
-            
-
-            Order order = ops.GetOrderNo(currentDate, orderNo);
+                if (order == null)
+                {
+                    Console.WriteLine("That order number does not exist. Try again.");
+                    Console.WriteLine();
+                }
+            } while (order == null); 
 
             order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
             order.StateName = PromptToEditStrings("StateName", order.StateName);
@@ -95,6 +101,7 @@ namespace SGCorporation.UI.Workflows
         {
             Console.Write("Enter the order number: ");
             string input = Console.ReadLine();
+
 
             int OrderNo = int.Parse(input);
 
