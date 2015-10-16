@@ -13,55 +13,72 @@ namespace SGCorporation.Data
     public class OrderRepoTest : IOrderRepository
 
     {
-        //private static string test = ConfigurationManager.AppSettings["Option"];
+        private static List<Order> _order = new List<Order>();
 
-        private const string _filePath = @"DataFiles\Orders_06012013.txt";
-
-        public List<Order> GetAllOrders(DateTime OrderDate)
+        public OrderRepoTest()
         {
-            List<Order> orders = new List<Order>();
-
-            string ordersFilePath = _filePath;
-
-            if (!File.Exists(ordersFilePath))
+            _order.AddRange(new List<Order>()
             {
-                return null;
-            }
-
-            string[] reader = File.ReadAllLines(ordersFilePath);
-
-            for (int i = 1; i < reader.Length; i++)
-            {
-                string[] columns = reader[i].Split(',');
-
-                Order order = new Order();
-
-                order.OrderNumber = int.Parse(columns[0]);
-                order.CustomerName = columns[1];
-                order.StateName = columns[2];
-                order.TaxRate = decimal.Parse(columns[3]);
-                order.ProductType = columns[4];
-                order.Area = decimal.Parse(columns[5]);
-                order.CostPerSquareFoot = decimal.Parse(columns[6]);
-                order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
-                order.MaterialCost = decimal.Parse(columns[8]);
-                order.LaborCost = decimal.Parse(columns[9]);
-                order.Tax = decimal.Parse(columns[10]);
-                order.Total = decimal.Parse(columns[11]);
-
-                orders.Add(order);
-            }
-            return orders;
-        }
-
-        public Order GetOrder(DateTime OrderDate, int OrderNo)
-        {
-            List<Order> orders = GetAllOrders(OrderDate);
-
-            return orders.FirstOrDefault(x => x.OrderNumber == OrderNo);
+                new Order
+                {
+                    OrderNumber = 1, CustomerName = "PAUL", Tax = 400.00M, Area = 100.00M, ProductType = "STEEL", StateName = "OH", TaxRate = 1.00M, LaborCostPerSquareFoot = 2.00M, CostPerSquareFoot = 2.00M
+                , MaterialCost = 200M, LaborCost = 200M, Total = 800.00M
+                }
+            });
         }
 
 
+
+
+        public List<Order> GetAllOrders(DateTime date)
+        {
+            return _order;
+        }
+
+
+        public void Add(Order newOrder)
+        {
+            // ternary operator is saying:
+            // if there are any contacts return the max contact id and add 1 to set our new contact id
+            // else set to 1
+            newOrder.OrderNumber = (_order.Any()) ? _order.Max(c => c.OrderNumber) + 1 : 1;
+
+            _order.Add(newOrder);
+        }
+
+
+
+        public void Delete(int OrderNumber)
+        {
+            _order.RemoveAll(c => c.OrderNumber == OrderNumber);
+        }
+
+        public void EditOrder(DateTime date, Order order)
+        {
+            Delete(order.OrderNumber);
+            _order.Add(order);
+        }
+
+
+        public Order GetByNo(int OrderNumber)
+        {
+            return _order.FirstOrDefault(c => c.OrderNumber == OrderNumber);
+        }
+
+        public int WriteNewLine(Order Order)
+        {
+            return 0;
+        }
+
+        public Order GetOrder(DateTime date, int number)
+        {
+            return _order.FirstOrDefault(c => c.OrderNumber == number);
+        }
+
+        public void RemoveOrder(DateTime OrderDate, Order OrderToUpdate)
+        {
+            
+        }
 
     }
 }
