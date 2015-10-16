@@ -49,7 +49,7 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine("That order number does not exist. Try again.");
                     Console.WriteLine();
                 }
-            } while (order == null); 
+            } while (order == null);
 
             order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
             order.StateName = PromptToEditStrings("StateName", order.StateName);
@@ -58,10 +58,10 @@ namespace SGCorporation.UI.Workflows
             Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
             order.TaxRate = currentStateTax.TaxRate;
 
-         
+
             order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
 
-          
+
 
             string productType = order.ProductType;
             Product currentProduct = ops.ReturnProduct(productType);
@@ -84,29 +84,29 @@ namespace SGCorporation.UI.Workflows
 
         public DateTime PromptForDate()
         {
-            
-                Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
-                string input = Console.ReadLine();
+            Console.Write("Enter the date for your order (MM/DD/YYYY): ");
+
+            string input = Console.ReadLine();
 
 
 
-                string[] format =
-                {
+            string[] format =
+            {
                     "M/d/yyyy", "MM/dd/yyyy",
                     "MMddyyyy", "MM-dd-yyyy",
                     "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
                 };
 
-                DateTime date = DateTime.ParseExact(input,
-                    format,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.None);
+            DateTime date = DateTime.ParseExact(input,
+                format,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None);
 
 
-                return date.Date;
+            return date.Date;
 
-            
+
         }
 
 
@@ -124,23 +124,22 @@ namespace SGCorporation.UI.Workflows
 
         public string PromptToEditStrings(string propertyName, string propertyValue)
         {
-            bool confirmation;
+            string answer;
             do
             {
-                Console.Write("Would you like to edit {0}? (Y/N)", propertyName);
-                string answer = Console.ReadLine();
-
+                Console.Write("Would you like to edit {0}? (Y/N) ", propertyName);
+                answer = Console.ReadLine();
 
                 if (answer.ToUpper() == "Y")
                 {
-                    confirmation = true;
+                    answer = "Y";
                 }
-                else
-                {
-                    string reply = "You declined to edit " + propertyName;
-                    return reply;
+                else if (answer.ToUpper() == "N")
+                { 
+                    return propertyValue;
                 }
-            } while (confirmation != true);
+
+            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N");
 
             switch (propertyName)
             {
@@ -150,37 +149,37 @@ namespace SGCorporation.UI.Workflows
                     do
                     {
                         Console.Write("Enter a new {0}: ", propertyName);
-                         input = Console.ReadLine();
+                        input = Console.ReadLine();
 
-                         response = ops.ValidInputCheckString(input);
+                        response = ops.ValidInputCheckString(input);
 
                         if (response.Success == false)
                         {
                             Console.WriteLine(response.Message);
 
                         }
-                        
-                        
+
+
                     } while (response.Success == false);
 
 
                     decimal inputAmount;
 
-                        if (decimal.TryParse(input, out inputAmount))
-                        {
-                            Console.WriteLine("Invalid entry");
-                            Console.ReadLine();
-                        }
+                    if (decimal.TryParse(input, out inputAmount))
+                    {
+                        Console.WriteLine("Invalid entry");
+                        Console.ReadLine();
+                    }
 
-                        if (input == propertyValue)
-                        {
-                            return propertyValue;
-                        }
-                        return input.ToUpper();
+                    if (input == propertyValue)
+                    {
+                        return propertyValue;
+                    }
+                    return input.ToUpper();
 
-                        
 
-                  
+
+
 
                 case "StateName":
 
@@ -199,7 +198,7 @@ namespace SGCorporation.UI.Workflows
                         }
 
 
-                    } while (response.Success == false); 
+                    } while (response.Success == false);
 
                     if (decimal.TryParse(input1, out inputAmount))
                     {
@@ -260,29 +259,29 @@ namespace SGCorporation.UI.Workflows
 
         public decimal PromptToEditDecimal(string propertyName, decimal propertyValue)
         {
-            bool confirmation;
+            //bool confirmation;
+            string answer;
+
             do
             {
-                Console.Write("Would you like to edit {0}? (Y/N)", propertyName);
-                string answer = Console.ReadLine();
+                Console.Write("Would you like to edit {0}? (Y/N) ", propertyName);
+                answer = Console.ReadLine();
 
                 if (answer.ToUpper() == "Y")
                 {
-                    confirmation = true;
+                    answer = "Y";
                 }
-                else
+                else if (answer.ToUpper() == "N")
                 {
-                    Console.WriteLine("You declined to edit {0}", propertyName);
-
-                    return 0;
+                    return propertyValue;
                 }
-            } while (confirmation != true);
+            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N");
 
 
 
             switch (propertyName)
             {
-                
+
 
                 case "Area":
 
@@ -314,7 +313,7 @@ namespace SGCorporation.UI.Workflows
                     }
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
-                    return 0;               
+                    return 0;
                 default:
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
