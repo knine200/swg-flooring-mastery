@@ -45,14 +45,11 @@ namespace SGCorporation.BLL
             {
                 response.Success = false;
                 response.Message = "This order does not exist";
-            }
-            else
-            {
-                response.Success = true;
-                response.Message = "You got all the orders for the date";
+                return response;
             }
 
-
+            response.Success = true;
+            response.Message = "You got all the orders for the date";
 
             foreach (Order order in orders)
             {
@@ -98,8 +95,17 @@ namespace SGCorporation.BLL
           
 
             newOrder.OrderNumber = 1;
-            Console.Write("Input the Customer Name: ");
-            newOrder.CustomerName = Console.ReadLine();
+
+            do
+            {
+                Console.Write("Input the Customer Name: ");
+                string customerNameInput = Console.ReadLine();
+
+                response = ValidInputCheckString(customerNameInput);
+                Console.WriteLine(response.Message);
+            } while (response.Success == false); 
+
+            //newOrder.CustomerName = Console.ReadLine();
 
             Console.Write("Input the State Abbreviation: ");
             string stateName = Console.ReadLine();
@@ -287,5 +293,24 @@ namespace SGCorporation.BLL
 
         }
 
+        public Response ValidInputCheckString(string userInput)
+        {
+            char[] undesirableChars = { ' ', ',', '\n', '\t', ';', '/', '\\', '|', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            
+            Response response = new Response();
+
+            foreach (var item in undesirableChars)
+            {
+                if (userInput.Contains(item))
+                {
+                    response.Success = false;
+                    response.Message = "Invalid entry. Only alphabetical characters allowed. Try again.";
+                    return response;
+                }
+            }
+            response.Success = true;
+            response.Message = "Valid entry";
+            return response;
+        }
     }
 }

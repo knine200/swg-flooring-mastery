@@ -49,6 +49,7 @@ namespace SGCorporation.UI.Workflows
         public void DisplayOrderInformation(DateTime userDate)
         {
             OrderOperations ops = new OrderOperations();
+            
             Response response = ops.GetAllOrders(userDate);
 
             if (response.Success)
@@ -56,8 +57,10 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine(response.Message);
                 Console.ReadLine();
             }
-            Console.WriteLine("There are no orders for that date!");
+
+            Console.WriteLine(response.Message);
             Console.ReadLine();
+
         }
 
         public void PrintOrderInformation(OrderSlip OrderSlip)
