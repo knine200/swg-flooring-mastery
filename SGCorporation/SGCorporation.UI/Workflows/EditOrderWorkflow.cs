@@ -146,12 +146,25 @@ namespace SGCorporation.UI.Workflows
             {
 
                 case "CustomerName":
-                    
-                    
+                    string input;
+                    do
+                    {
                         Console.Write("Enter a new {0}: ", propertyName);
-                        string input = Console.ReadLine();
-                        // response = ops.ValidInputCheckString(input);
-                        decimal inputAmount;
+                         input = Console.ReadLine();
+
+                         response = ops.ValidInputCheckString(input);
+
+                        if (response.Success == false)
+                        {
+                            Console.WriteLine(response.Message);
+
+                        }
+                        
+                        
+                    } while (response.Success == false);
+
+
+                    decimal inputAmount;
 
                         if (decimal.TryParse(input, out inputAmount))
                         {
@@ -164,12 +177,29 @@ namespace SGCorporation.UI.Workflows
                             return propertyValue;
                         }
                         return input.ToUpper();
-                     
+
+                        
+
+                  
 
                 case "StateName":
 
-                    Console.Write("Enter a new {0}: ", propertyName);
-                    string input1 = Console.ReadLine();
+                    string input1;
+
+                    do
+                    {
+                        Console.Write("Enter a new {0}: ", propertyName);
+                        input1 = Console.ReadLine();
+
+                        response = ops.ValidInputCheckString(input1);
+
+                        if (response.Success == false)
+                        {
+                            Console.WriteLine(response.Message);
+                        }
+
+
+                    } while (response.Success == false); 
 
                     if (decimal.TryParse(input1, out inputAmount))
                     {
@@ -185,8 +215,25 @@ namespace SGCorporation.UI.Workflows
 
 
                 case "ProductType":
-                    Console.Write("Enter a new {0}: ", propertyName);
-                    string input2 = Console.ReadLine();
+
+                    string input2;
+
+                    do
+                    {
+                        Console.Write("Enter a new {0}: ", propertyName);
+                        input2 = Console.ReadLine();
+
+                        response = ops.ValidInputCheckString(input2);
+
+
+                        if (response.Success == false)
+                        {
+                            Console.WriteLine(response.Message);
+                        }
+
+
+                    } while (response.Success == false);
+
 
                     string input3 = ops.UppercaseFirst(input2);
 
@@ -235,9 +282,26 @@ namespace SGCorporation.UI.Workflows
 
             switch (propertyName)
             {
+                
+
                 case "Area":
-                    Console.Write("Enter a new {0}: ", propertyName);
-                    string input = Console.ReadLine();
+
+                    string input;
+                    do
+                    {
+                        Console.Write("Enter a new {0}: ", propertyName);
+                        input = Console.ReadLine();
+                        response = ops.ValidInputCheckDecimal(input);
+
+                        if (response.Success == false)
+                        {
+                            Console.WriteLine(response.Message);
+                        }
+
+                    } while (response.Success == false);
+
+
+
                     decimal inputAmount;
                     if (decimal.TryParse(input, out inputAmount))
                     {
