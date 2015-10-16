@@ -11,7 +11,7 @@ namespace SGCorporation.UI.Workflows
 {
     public class DisplayOrdersWorkflow
     {
-        private Order _currentOrder;
+       // private Order _currentOrder;
 
         public void Execute()
         {
