@@ -25,7 +25,20 @@ namespace SGCorporation.UI.Workflows
         {
             Console.Clear();
             Order order = new Order();
-            DateTime currentDate = PromptForDate();
+            DateTime currentDate;
+
+            do
+            {
+                currentDate = PromptForDate();
+                response = ops.GetAllOrders(currentDate);
+
+                if (response.Success == false)
+                {
+                    Console.WriteLine("This date does not exist!");
+                }
+            } while (response.Success == false);
+
+
             do
             {
                 int orderNo = PromptForOrderNo();
@@ -72,27 +85,28 @@ namespace SGCorporation.UI.Workflows
         public DateTime PromptForDate()
         {
             
+                Console.Write("Enter the date for your order (MM/DD/YYYY): ");
+
+                string input = Console.ReadLine();
+
+
+
+                string[] format =
+                {
+                    "M/d/yyyy", "MM/dd/yyyy",
+                    "MMddyyyy", "MM-dd-yyyy",
+                    "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
+                };
+
+                DateTime date = DateTime.ParseExact(input,
+                    format,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None);
+
+
+                return date.Date;
+
             
-
-            Console.Write("Enter the date for your order (MM/DD/YYYY): ");
-
-            string input = Console.ReadLine();
-
-            string[] format =
-            {
-                "M/d/yyyy", "MM/dd/yyyy",
-                "MMddyyyy", "MM-dd-yyyy",
-                "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
-            };
-
-            DateTime date = DateTime.ParseExact(input,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
-
-
-            return date.Date;
-
         }
 
 
@@ -132,11 +146,13 @@ namespace SGCorporation.UI.Workflows
             {
 
                 case "CustomerName":
-                    Console.Write("Enter a new {0}: ", propertyName);
-                    string input = Console.ReadLine();
-                   // response = ops.ValidInputCheckString(input);
-                    decimal inputAmount;
-                                                 
+                    
+                    
+                        Console.Write("Enter a new {0}: ", propertyName);
+                        string input = Console.ReadLine();
+                        // response = ops.ValidInputCheckString(input);
+                        decimal inputAmount;
+
                         if (decimal.TryParse(input, out inputAmount))
                         {
                             Console.WriteLine("Invalid entry");
@@ -148,9 +164,10 @@ namespace SGCorporation.UI.Workflows
                             return propertyValue;
                         }
                         return input.ToUpper();
-                 
+                     
 
                 case "StateName":
+
                     Console.Write("Enter a new {0}: ", propertyName);
                     string input1 = Console.ReadLine();
 

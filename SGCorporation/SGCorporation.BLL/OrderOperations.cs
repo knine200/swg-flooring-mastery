@@ -44,7 +44,7 @@ namespace SGCorporation.BLL
             if (orders == null)
             {
                 response.Success = false;
-                response.Message = "This order does not exist";
+                response.Message = "There is no orders for this date";
                 return response;
             }
 

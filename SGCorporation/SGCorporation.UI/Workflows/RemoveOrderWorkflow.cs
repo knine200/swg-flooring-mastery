@@ -16,8 +16,19 @@ namespace SGCorporation.UI.Workflows
             Console.Clear();
             OrderOperations ops = new OrderOperations();
             Order orderToRemove = new Order();
+            Response response1 = new Response();
 
-            DateTime currentDate = PromptForDate();
+            DateTime currentDate;
+
+            do
+            {
+                currentDate = PromptForDate();
+                response1 = ops.GetAllOrders(currentDate);
+                if (response1.Success == false)
+                {
+                    Console.WriteLine("This date does not exist!");
+                }
+            } while (response1.Success == false);
 
             do
             {
