@@ -18,6 +18,8 @@ namespace SGCorporation.BLL
         public ProductRepository ProductRepo;
         public TaxRepoTest TaxRepoTest;
         public ProductRepoTest ProductRepoTest;
+        public OrderRepositoryFactory factory;
+        
 
         //public OrderRepositoryFactory factory;
 
@@ -25,18 +27,16 @@ namespace SGCorporation.BLL
         {
             TaxRepo = new TaxRepository();
             ProductRepo = new ProductRepository();
-            //factory = new OrderRepositoryFactory();
+            factory = new OrderRepositoryFactory();
 
         }
 
-        //public void DetermineProdOrTestMode()
-        //{
-
-        //}
+        
 
         public Response GetAllOrders(DateTime OrderDate)
         {
-            OrderRepository repo = new OrderRepository();
+            var repo = factory.CreateOrderRepository();
+
             Response response = new Response();
 
             List<Order> orders = repo.GetAllOrders(OrderDate);
@@ -88,7 +88,8 @@ namespace SGCorporation.BLL
 
         public Response CreateOrder()
         {
-            OrderRepository repo = new OrderRepository();
+            var repo = factory.CreateOrderRepository();
+
             Response response = new Response();
             Order newOrder = new Order();
 
@@ -225,39 +226,43 @@ namespace SGCorporation.BLL
             Console.WriteLine("Please confirm your order creation? (Y/N) ");
             string userInput = Console.ReadLine();
 
-            if (userInput.ToUpper() == "Y")
+
+            if (repo == new OrderRepository())
             {
-                int returnedOrderNumber = repo.WriteNewLine(newOrder);
-
-                string input = "01012016";
-                string format = "MMddyyyy";
-                DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-                if (returnedOrderNumber == repo.GetAllOrders(date).Count)
+                if (userInput.ToUpper() == "Y")
                 {
-                    response.Success = true;
-                    response.CreateOrderInfo = new CreateOrderSlip();
-                    response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
-                    response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
-                    response.CreateOrderInfo.StateName = newOrder.StateName;
-                    response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
-                    response.CreateOrderInfo.ProductType = newOrder.ProductType;
-                    response.CreateOrderInfo.Area = newOrder.Area;
-                    response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
-                    response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
-                    response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
-                    response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
-                    response.CreateOrderInfo.Tax = newOrder.Tax;
-                    response.CreateOrderInfo.Total = newOrder.Total;
+                    int returnedOrderNumber = repo.WriteNewLine(newOrder);
+
+                    string input = "01012016";
+                    string format = "MMddyyyy";
+                    DateTime date = DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                    if (returnedOrderNumber == repo.GetAllOrders(date).Count)
+                    {
+                        response.Success = true;
+                        response.CreateOrderInfo = new CreateOrderSlip();
+                        response.CreateOrderInfo.OrderNumber = returnedOrderNumber;
+                        response.CreateOrderInfo.CustomerName = newOrder.CustomerName;
+                        response.CreateOrderInfo.StateName = newOrder.StateName;
+                        response.CreateOrderInfo.TaxRate = newOrder.TaxRate;
+                        response.CreateOrderInfo.ProductType = newOrder.ProductType;
+                        response.CreateOrderInfo.Area = newOrder.Area;
+                        response.CreateOrderInfo.CostPerSquareFoot = newOrder.CostPerSquareFoot;
+                        response.CreateOrderInfo.LaborCostPerSquareFoot = newOrder.LaborCostPerSquareFoot;
+                        response.CreateOrderInfo.MaterialCost = newOrder.MaterialCost;
+                        response.CreateOrderInfo.LaborCost = newOrder.LaborCost;
+                        response.CreateOrderInfo.Tax = newOrder.Tax;
+                        response.CreateOrderInfo.Total = newOrder.Total;
+                    }
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Order creation cancelled";
                 }
             }
-            else
-            {
-                response.Success = false;
-                response.Message = "Order creation cancelled";
-            }
-
             return response;
+            
         }
 
 
@@ -267,7 +272,7 @@ namespace SGCorporation.BLL
 
             if (Order.OrderNumber > 0)
             {
-                OrderRepository repo = new OrderRepository();
+                var repo = factory.CreateOrderRepository();
 
                 repo.EditOrder(OrderDate, Order);
 
@@ -301,7 +306,8 @@ namespace SGCorporation.BLL
 
             if (Order.OrderNumber > 0)
             {
-                OrderRepository repo = new OrderRepository();
+                var repo = factory.CreateOrderRepository();
+
                 repo.RemoveOrder(OrderDate, Order);
                 response.Success = true;
                 response.Message = "You have deleted your Order!";
@@ -318,7 +324,7 @@ namespace SGCorporation.BLL
 
         public Order GetOrderNo(DateTime OrderDate, int OrderNo)
         {
-            OrderRepository repo = new OrderRepository();
+            var repo = factory.CreateOrderRepository();
             Order order = repo.GetOrder(OrderDate, OrderNo);
 
             return order;

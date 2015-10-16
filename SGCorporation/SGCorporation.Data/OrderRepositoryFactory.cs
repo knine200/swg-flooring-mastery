@@ -10,22 +10,21 @@ namespace SGCorporation.Data
 {
     public class OrderRepositoryFactory
     {
-        private string _value = ConfigurationManager.AppSettings["Option"];
+        // private string _value = ConfigurationManager.AppSettings["Option"];
 
-        public IOrderRepository CreateOrderRepository()
+        public  IOrderRepository CreateOrderRepository()
         {
 
-            switch (_value)
+            switch (ConfigurationManager.AppSettings["mode"].ToLower())
             {
-                //case "Test":
-                // return new OrderRepoTest();
-                    
-                case "Prod":
+                case "test":
+                    return new OrderRepoTest();
+                case "prod":
                     return new OrderRepository();
                 default:
-                    throw new Exception(string.Format("{0} not supported!"));
-            }
+                    throw new NotSupportedException();
 
+            }
         }
     }
 }
