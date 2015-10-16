@@ -12,10 +12,13 @@ namespace SGCorporation.UI.Workflows
     public class EditOrderWorkflow
     {
         public OrderOperations ops;
+        public Response response;
 
         public EditOrderWorkflow()
         {
             ops = new OrderOperations();
+            response = new Response();
+
         }
 
         public void Execute()
@@ -106,6 +109,7 @@ namespace SGCorporation.UI.Workflows
                 Console.Write("Would you like to edit {0}? (Y/N)", propertyName);
                 string answer = Console.ReadLine();
 
+
                 if (answer.ToUpper() == "Y")
                 {
                     confirmation = true;
@@ -119,25 +123,30 @@ namespace SGCorporation.UI.Workflows
 
             switch (propertyName)
             {
+
                 case "CustomerName":
                     Console.Write("Enter a new {0}: ", propertyName);
                     string input = Console.ReadLine();
+                   // response = ops.ValidInputCheckString(input);
                     decimal inputAmount;
-                    if (decimal.TryParse(input, out inputAmount))
-                    {
-                        Console.WriteLine("Invalid entry");
-                        Console.ReadLine();
-                    }
+                                                 
+                        if (decimal.TryParse(input, out inputAmount))
+                        {
+                            Console.WriteLine("Invalid entry");
+                            Console.ReadLine();
+                        }
 
-                    if (input == propertyValue)
-                    {
-                        return propertyValue;
-                    }
-                    return input.ToUpper();
+                        if (input == propertyValue)
+                        {
+                            return propertyValue;
+                        }
+                        return input.ToUpper();
+                 
 
                 case "StateName":
                     Console.Write("Enter a new {0}: ", propertyName);
                     string input1 = Console.ReadLine();
+
                     if (decimal.TryParse(input1, out inputAmount))
                     {
                         Console.WriteLine("Invalid entry");
@@ -149,6 +158,7 @@ namespace SGCorporation.UI.Workflows
                         return propertyValue;
                     }
                     return input1;
+
 
                 case "ProductType":
                     Console.Write("Enter a new {0}: ", propertyName);

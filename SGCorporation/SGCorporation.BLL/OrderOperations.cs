@@ -18,7 +18,7 @@ namespace SGCorporation.BLL
         public ProductRepository ProductRepo;
         public TaxRepoTest TaxRepoTest;
         public ProductRepoTest ProductRepoTest;
-       
+
         //public OrderRepositoryFactory factory;
 
         public OrderOperations()
@@ -31,7 +31,7 @@ namespace SGCorporation.BLL
 
         //public void DetermineProdOrTestMode()
         //{
-            
+
         //}
 
         public Response GetAllOrders(DateTime OrderDate)
@@ -54,8 +54,8 @@ namespace SGCorporation.BLL
             foreach (Order order in orders)
             {
                 Console.WriteLine();
-                
-                
+
+
                 Console.WriteLine("OrderNumber: {0} " +
                                   "\nCustomerName: {1} " +
                                   "\nStateName: {2}" +
@@ -68,18 +68,18 @@ namespace SGCorporation.BLL
                                   "\nLaborCost: {9:c} " +
                                   "\nTax: {10:c} " +
                                   "\nTotal: {11:c}",
-                                  order.OrderNumber,
-                                  order.CustomerName,
-                                  order.StateName,
-                                  order.TaxRate,
-                                  order.ProductType,
-                                  order.Area,
-                                  order.CostPerSquareFoot,
-                                  order.LaborCostPerSquareFoot,
-                                  order.MaterialCost,
-                                  order.LaborCost,
-                                  order.Tax,
-                                  order.Total);
+                    order.OrderNumber,
+                    order.CustomerName,
+                    order.StateName,
+                    order.TaxRate,
+                    order.ProductType,
+                    order.Area,
+                    order.CostPerSquareFoot,
+                    order.LaborCostPerSquareFoot,
+                    order.MaterialCost,
+                    order.LaborCost,
+                    order.Tax,
+                    order.Total);
                 Console.WriteLine();
 
             }
@@ -91,8 +91,8 @@ namespace SGCorporation.BLL
             OrderRepository repo = new OrderRepository();
             Response response = new Response();
             Order newOrder = new Order();
-           
-          
+
+
 
             newOrder.OrderNumber = 1;
 
@@ -115,14 +115,26 @@ namespace SGCorporation.BLL
             {
                 Console.Write("Input the State Abbreviation: ");
                 string stateName = Console.ReadLine();
-                response = ValidInputCheckString(stateName);
-                Console.WriteLine(response.Message);
 
-                if (response.Success)
+                if (stateName.Contains("oh") || stateName.Contains("mi") || stateName.Contains("pa") ||
+                    stateName.Contains("in"))
                 {
-                    newOrder.StateName = stateName.ToUpper();
-                    Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-                    newOrder.TaxRate = stateTaxObject.TaxRate / 100;
+                    response = ValidInputCheckString(stateName);
+                    Console.WriteLine(response.Message);
+
+
+                    if (response.Success)
+                    {
+                        newOrder.StateName = stateName.ToUpper();
+                        Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
+                        newOrder.TaxRate = stateTaxObject.TaxRate/100;
+                    }
+
+                }
+                else
+                {
+                    response = ValidInputCheckString("1");
+                    Console.WriteLine("Invalid state selected!!");
                 }
 
 
@@ -141,7 +153,7 @@ namespace SGCorporation.BLL
 
                 if (response.Success)
                 {
-                    
+
                     Product ProductTypeObject = ProductRepo.GetProduct(UppercaseFirst(productType));
                     newOrder.ProductType = ProductTypeObject.ProductType;
 
@@ -151,49 +163,61 @@ namespace SGCorporation.BLL
                 }
 
 
-            } while (response.Success == false); 
+            } while (response.Success == false);
 
 
+            do
+            {
+                Console.Write("Input the Area: ");
+                string Area = Console.ReadLine();
+                response = ValidInputCheckDecimal(Area);
+                Console.WriteLine(response.Message);
 
-            Console.Write("Input the Area: ");
-            string Area = Console.ReadLine();
-            newOrder.Area = decimal.Parse(Area);
+                if (response.Success)
+                {
+                    newOrder.Area = decimal.Parse(Area);
+
+                }
+
+            } while (response.Success == false);
+
+            
 
             //newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
             //newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
-            
 
-            newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
-            newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
-            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost) * newOrder.TaxRate;
+
+            newOrder.MaterialCost = newOrder.Area*newOrder.CostPerSquareFoot;
+            newOrder.LaborCost = newOrder.Area*newOrder.LaborCostPerSquareFoot;
+            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost)*newOrder.TaxRate;
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
             Console.WriteLine();
             Console.WriteLine("OrderNumber: {0} " +
-                                  "\nCustomerName: {1} " +
-                                  "\nStateName: {2}" +
-                                  "\nTaxRate: {3}" +
-                                  "\nProductType: {4}" +
-                                  "\nArea: {5} " +
-                                  "\nCostPerSquareFoot: {6:c} " +
-                                  "\nLaborCostPerSquareFoot: {7:c} " +
-                                  "\nMaterialCost: {8:c} " +
-                                  "\nLaborCost: {9:c} " +
-                                  "\nTax: {10:c} " +
-                                  "\nTotal: {11:c}",
-                                  newOrder.OrderNumber,
-                                  newOrder.CustomerName,
-                                  newOrder.StateName,
-                                  newOrder.TaxRate,
-                                  newOrder.ProductType,
-                                  newOrder.Area,
-                                  newOrder.CostPerSquareFoot,
-                                  newOrder.LaborCostPerSquareFoot,
-                                  newOrder.MaterialCost,
-                                  newOrder.LaborCost,
-                                  newOrder.Tax,
-                                  newOrder.Total);
+                              "\nCustomerName: {1} " +
+                              "\nStateName: {2}" +
+                              "\nTaxRate: {3}" +
+                              "\nProductType: {4}" +
+                              "\nArea: {5} " +
+                              "\nCostPerSquareFoot: {6:c} " +
+                              "\nLaborCostPerSquareFoot: {7:c} " +
+                              "\nMaterialCost: {8:c} " +
+                              "\nLaborCost: {9:c} " +
+                              "\nTax: {10:c} " +
+                              "\nTotal: {11:c}",
+                newOrder.OrderNumber,
+                newOrder.CustomerName,
+                newOrder.StateName,
+                newOrder.TaxRate,
+                newOrder.ProductType,
+                newOrder.Area,
+                newOrder.CostPerSquareFoot,
+                newOrder.LaborCostPerSquareFoot,
+                newOrder.MaterialCost,
+                newOrder.LaborCost,
+                newOrder.Tax,
+                newOrder.Total);
 
             Console.WriteLine();
 
@@ -226,7 +250,7 @@ namespace SGCorporation.BLL
                     response.CreateOrderInfo.Tax = newOrder.Tax;
                     response.CreateOrderInfo.Total = newOrder.Total;
                 }
-            }          
+            }
             else
             {
                 response.Success = false;
@@ -329,8 +353,12 @@ namespace SGCorporation.BLL
 
         public Response ValidInputCheckString(string userInput)
         {
-            char[] undesirableChars = { ' ', ',', '\n', '\t', ';', '/', '\\', '|', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            
+            char[] undesirableChars =
+            {
+                ' ', ',', '\n', '\t', ';', '/', '\\', '|', '0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9'
+            };
+
             Response response = new Response();
 
             foreach (var item in undesirableChars)
@@ -338,13 +366,40 @@ namespace SGCorporation.BLL
                 if (userInput.Contains(item))
                 {
                     response.Success = false;
+                    
                     response.Message = "Invalid entry. Only alphabetical characters allowed. Try again.";
                     return response;
                 }
             }
             response.Success = true;
-            response.Message = "Valid entry";
+            //response.Message = "Valid entry";
             return response;
         }
+
+        public Response ValidInputCheckDecimal(string userInput)
+        {
+            char[] undesirableChars =
+            {
+                ' ', ',', '\n', '\t', ';', '/', '\\', '|', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z',
+            };
+
+            Response response = new Response();
+
+            foreach (var item in undesirableChars)
+            {
+                if (userInput.Contains(item))
+                {
+                    response.Success = false;
+                    response.Message = "Invalid entry. Only number characters allowed. Try again.";
+                    return response;
+                }
+            }
+            response.Success = true;
+            //response.Message = "Valid entry";
+            return response;
+        }
+
+
     }
 }
