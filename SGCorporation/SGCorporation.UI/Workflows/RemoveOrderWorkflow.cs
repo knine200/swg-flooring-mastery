@@ -65,19 +65,31 @@ namespace SGCorporation.UI.Workflows
             Console.ReadLine();
         }
 
+
+
         public DateTime PromptForDate()
         {
-            Console.Write("Enter the date for your Order Date (MMDDYYYY): ");
+            Console.Write("Enter the date for your order (MM/DD/YYYY): ");
+
             string input = Console.ReadLine();
 
-            string format = "MMddyyyy";
+            string[] format =
+            {
+                "M/d/yyyy", "MM/dd/yyyy",
+                "MMddyyyy", "MM-dd-yyyy",
+                "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
+            };
+
             DateTime date = DateTime.ParseExact(input,
                 format,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None);
 
-            return date;
+
+            return date.Date;
+
         }
+
 
         public int PromptForOrderNo()
         {

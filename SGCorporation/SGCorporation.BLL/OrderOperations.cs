@@ -14,6 +14,7 @@ namespace SGCorporation.BLL
     {
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
+       
         //public OrderRepositoryFactory factory;
 
         public OrderOperations()
@@ -92,6 +93,7 @@ namespace SGCorporation.BLL
             Console.Write("Input the State Abbreviation: ");
             string stateName = Console.ReadLine();
             newOrder.StateName = stateName.ToUpper();
+
             Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
             newOrder.TaxRate = stateTaxObject.TaxRate / 100;
             

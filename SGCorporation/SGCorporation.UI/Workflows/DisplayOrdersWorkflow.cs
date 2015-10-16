@@ -23,20 +23,26 @@ namespace SGCorporation.UI.Workflows
         public DateTime GetDateFromUser()
         {
 
-            Console.Clear();
+            Console.Clear();  
+                  
             Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
             string input = Console.ReadLine();
-            DateTime correctDate = DateTime.Parse(input);
 
-            //string format = "MMddyyyy";
+            string[] format =
+            {
+                "M/d/yyyy", "MM/dd/yyyy",
+                "MMddyyyy", "MM-dd-yyyy",
+                "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy", "Mdyyyy"
+            };
 
-            //DateTime date = DateTime.ParseExact(input,
-            //    format,
-            //    CultureInfo.InvariantCulture,
-            //    DateTimeStyles.None);
+            DateTime date = DateTime.ParseExact(input,
+                format,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None);
 
-            return correctDate.Date;
+
+            return date.Date;
         }
 
         public void DisplayOrderInformation(DateTime userDate)
