@@ -15,7 +15,6 @@ namespace SGCorporation.UI
             //ReadSettings();
             MainMenu main = new MainMenu();
             main.Execute();
-            Console.ReadLine();
 
         }
 

@@ -10,7 +10,7 @@ using SGCorporation.Models.Interfaces;
 
 namespace SGCorporation.Data
 {
-    public class TestRepository: IOrderRepository
+    public class TestRepository : IOrderRepository
 
     {
         private static string test = ConfigurationManager.AppSettings["Option"];

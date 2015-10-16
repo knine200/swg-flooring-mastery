@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DataFiles\log.txt" />
     <Content Include="DataFiles\Orders_06012013.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
