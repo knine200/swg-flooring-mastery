@@ -100,33 +100,67 @@ namespace SGCorporation.BLL
             {
                 Console.Write("Input the Customer Name: ");
                 string customerNameInput = Console.ReadLine();
-
                 response = ValidInputCheckString(customerNameInput);
                 Console.WriteLine(response.Message);
+
+                if (response.Success)
+                {
+                    newOrder.CustomerName = customerNameInput;
+                }
+
+            } while (response.Success == false);
+
+
+            do
+            {
+                Console.Write("Input the State Abbreviation: ");
+                string stateName = Console.ReadLine();
+                response = ValidInputCheckString(stateName);
+                Console.WriteLine(response.Message);
+
+                if (response.Success)
+                {
+                    newOrder.StateName = stateName.ToUpper();
+                    Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
+                    newOrder.TaxRate = stateTaxObject.TaxRate / 100;
+                }
+
+
+            } while (response.Success == false);
+
+
+            //Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
+            //newOrder.TaxRate = stateTaxObject.TaxRate / 100;
+
+            do
+            {
+                Console.Write("Input the Product Type: ");
+                string productType = Console.ReadLine();
+                response = ValidInputCheckString(productType);
+                Console.WriteLine(response.Message);
+
+                if (response.Success)
+                {
+                    
+                    Product ProductTypeObject = ProductRepo.GetProduct(UppercaseFirst(productType));
+                    newOrder.ProductType = ProductTypeObject.ProductType;
+
+                    newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
+                    newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
+
+                }
+
+
             } while (response.Success == false); 
 
-            //newOrder.CustomerName = Console.ReadLine();
 
-            Console.Write("Input the State Abbreviation: ");
-            string stateName = Console.ReadLine();
-            newOrder.StateName = stateName.ToUpper();
-
-            Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-            newOrder.TaxRate = stateTaxObject.TaxRate / 100;
-            
-            
-            Console.Write("Input the Product Type: ");
-            string productType = Console.ReadLine();
-            
-            Product ProductTypeObject = ProductRepo.GetProduct(UppercaseFirst(productType));
-            newOrder.ProductType = UppercaseFirst(productType);
 
             Console.Write("Input the Area: ");
             string Area = Console.ReadLine();
             newOrder.Area = decimal.Parse(Area);
 
-            newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
-            newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
+            //newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
+            //newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
             
 
