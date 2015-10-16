@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\ProductRepoTest.cs" />
+    <Compile Include="Mocks\TaxRepoTest.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="OrderRepositoryFactory.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaxRepository.cs" />
-    <Compile Include="TestRepository.cs" />
+    <Compile Include="OrderRepoTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mocks\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SGCorporation.Models\SGCorporation.Models.csproj">
       <Project>{54248eac-9181-4251-8c05-dc8084434cd8}</Project>

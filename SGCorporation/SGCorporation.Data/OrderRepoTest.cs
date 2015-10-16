@@ -10,10 +10,10 @@ using SGCorporation.Models.Interfaces;
 
 namespace SGCorporation.Data
 {
-    public class TestRepository : IOrderRepository
+    public class OrderRepoTest : IOrderRepository
 
     {
-        private static string test = ConfigurationManager.AppSettings["Option"];
+        //private static string test = ConfigurationManager.AppSettings["Option"];
 
         private const string _filePath = @"DataFiles\Orders_06012013.txt";
 

@@ -10,15 +10,15 @@ namespace SGCorporation.Data
 {
     public class OrderRepositoryFactory
     {
-        private static string _value = ConfigurationManager.AppSettings["Option"];
+        private string _value = ConfigurationManager.AppSettings["Option"];
 
-        public static IOrderRepository CreateOrderRepository()
+        public IOrderRepository CreateOrderRepository()
         {
 
             switch (_value)
             {
                 //case "Test":
-                // return new TestRepository();
+                // return new OrderRepoTest();
                     
                 case "Prod":
                     return new OrderRepository();

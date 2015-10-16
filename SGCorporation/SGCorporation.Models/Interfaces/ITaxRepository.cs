@@ -8,6 +8,6 @@ namespace SGCorporation.Models.Interfaces
 {
     public interface ITaxRepository
     {
-        List<Tax> GetAllTax(Tax StateAbbreviation);
+        List<Tax> GetAllTax();
     }
 }

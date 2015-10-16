@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,15 @@ namespace SGCorporation.Data
 {
     public class OrderRepository : IOrderRepository
     {
+        private string _value = ConfigurationManager.AppSettings["Option"];
+
         public string GetFilePath(DateTime OrderDate)
         {
+            if (_value == "Test")
+            {
+                return @"DataFiles\TestData.txt";
+            }
+
             //File names vary depending on the date.
             //File names are always in the following format Orders_MMDDYYYY.
             //The DateTime object is accepted and converted to a string.

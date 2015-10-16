@@ -8,6 +8,6 @@ namespace SGCorporation.Models.Interfaces
 {
     public interface IProductRepository
     {
-        List<Product> GetAllProducts(Product ProductType);
+        List<Product> GetAllProducts();
     }
 }
