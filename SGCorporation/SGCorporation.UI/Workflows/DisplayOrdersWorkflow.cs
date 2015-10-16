@@ -56,6 +56,8 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine(response.Message);
                 Console.ReadLine();
             }
+            Console.WriteLine("There are no orders for that date!");
+            Console.ReadLine();
         }
 
         public void PrintOrderInformation(OrderSlip OrderSlip)
