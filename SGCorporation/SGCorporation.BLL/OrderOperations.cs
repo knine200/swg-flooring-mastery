@@ -52,6 +52,8 @@ namespace SGCorporation.BLL
                 response.Message = "You got all the orders for the date";
             }
 
+
+
             foreach (Order order in orders)
             {
                 Console.WriteLine();

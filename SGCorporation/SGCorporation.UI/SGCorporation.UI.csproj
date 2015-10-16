@@ -71,6 +71,7 @@
     <Content Include="DataFiles\Orders_10012015.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="DataFiles\Orders_12012015.txt" />
     <Content Include="DataFiles\Products.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -80,7 +81,6 @@
     <Content Include="DataFiles\Orders_01012016.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="DataFiles\TestData.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGCorporation.BLL\SGCorporation.BLL.csproj">
