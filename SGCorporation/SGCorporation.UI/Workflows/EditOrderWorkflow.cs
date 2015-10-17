@@ -190,6 +190,7 @@ namespace SGCorporation.UI.Workflows
                     string input2;
                     do
                     {
+                        Console.WriteLine("Carpet     Laminate     Tile     Wood");
                         Console.Write("Enter a new {0}: ", propertyName);
                         input2 = Console.ReadLine();
 

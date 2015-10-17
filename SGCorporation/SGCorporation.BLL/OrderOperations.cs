@@ -93,7 +93,6 @@ namespace SGCorporation.BLL
                 string customerNameInput = Console.ReadLine();
                 response = ValidInputCheckString(customerNameInput);
                 Console.WriteLine(response.Message);
-                Console.WriteLine();
 
                 if (response.Success)
                 {
@@ -107,10 +106,11 @@ namespace SGCorporation.BLL
             {
                 Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
                 Console.Write("Input the State Abbreviation: ");
-                string stateName = Console.ReadLine();
+                string stateInput = Console.ReadLine();
+                string stateName = stateInput.ToUpper();
 
-                if (stateName.Contains("oh") || stateName.Contains("mi") || stateName.Contains("pa") ||
-                    stateName.Contains("in"))
+                if (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
+                    stateName == "IN")
                 {
                     response = ValidInputCheckString(stateName);
                     Console.WriteLine(response.Message);
@@ -128,7 +128,7 @@ namespace SGCorporation.BLL
                 {
                     response = ValidInputCheckString("1");
                     Console.WriteLine();
-                    Console.WriteLine("Invalid state");
+                    Console.WriteLine("Invalid state abbreviation");
                     Console.WriteLine();
                 }
 
@@ -136,8 +136,10 @@ namespace SGCorporation.BLL
 
             do
             {
+                Console.WriteLine("carpet     laminate     tile     wood");
                 Console.Write("Input the Product Type: ");
                 string productType = Console.ReadLine();
+
                 response = ValidInputCheckString(productType);
                 Console.WriteLine(response.Message);
 
@@ -151,18 +153,26 @@ namespace SGCorporation.BLL
                     newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
                 }
+                else
+                {
+                    response = ValidInputCheckString("1");
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid product type");
+                    Console.WriteLine();
+                }
+
             } while (response.Success == false);
 
             do
             {
                 Console.Write("Input the Area: ");
-                string Area = Console.ReadLine();
-                response = ValidInputCheckDecimal(Area);
+                string area = Console.ReadLine();
+                response = ValidInputCheckDecimal(area);
                 Console.WriteLine(response.Message);
 
                 if (response.Success)
                 {
-                    newOrder.Area = decimal.Parse(Area);
+                    newOrder.Area = decimal.Parse(area);
 
                 }
 
@@ -380,7 +390,6 @@ namespace SGCorporation.BLL
                 }
             }
             response.Success = true;
-            //response.Message = "Valid entry";
             return response;
         }
 
