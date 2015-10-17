@@ -11,7 +11,6 @@ namespace SGCorporation.UI.Workflows
 {
     public class DisplayOrdersWorkflow
     {
-        // private Order _currentOrder;
 
         public void Execute()
         {
@@ -22,26 +21,15 @@ namespace SGCorporation.UI.Workflows
 
         public DateTime GetDateFromUser()
         {
-
             Console.Clear();
 
             Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
             string input = Console.ReadLine();
 
-            string[] format =
-            {
-                "M/d/yyyy", "MM/dd/yyyy",
-                "MMddyyyy", "MM-dd-yyyy",
-                "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy", "Mdyyyy"
-            };
+            DateTime date;
 
-
-            DateTime date = DateTime.ParseExact(input,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
-
+            DateTime.TryParse(input, out date);
 
             return date.Date;
         }
@@ -62,8 +50,8 @@ namespace SGCorporation.UI.Workflows
             }
 
             Console.WriteLine();
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
 
         }
 

@@ -87,17 +87,9 @@ namespace SGCorporation.UI.Workflows
 
             string input = Console.ReadLine();
 
-            string[] format =
-            {
-                    "M/d/yyyy", "MM/dd/yyyy",
-                    "MMddyyyy", "MM-dd-yyyy",
-                    "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
-                };
+            DateTime date;
 
-            DateTime date = DateTime.ParseExact(input,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
+            DateTime.TryParse(input, out date);
 
             return date.Date;
 
@@ -124,9 +116,9 @@ namespace SGCorporation.UI.Workflows
 
                 if (answer.ToUpper() == "Y")
                 {
-                    answer = "Y";
+                    break;
                 }
-                else if (answer.ToUpper() == "N")
+                if (answer.ToUpper() == "N")
                 {
                     return propertyValue;
                 }
@@ -169,6 +161,7 @@ namespace SGCorporation.UI.Workflows
                     string input1;
                     do
                     {
+                        Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
                         Console.Write("Enter a new {0}: ", propertyName);
                         input1 = Console.ReadLine();
 
@@ -243,9 +236,9 @@ namespace SGCorporation.UI.Workflows
 
                 if (answer.ToUpper() == "Y")
                 {
-                    answer = "Y";
+                    break;
                 }
-                else if (answer.ToUpper() == "N")
+                if (answer.ToUpper() == "N")
                 {
                     return propertyValue;
                 }
@@ -287,8 +280,6 @@ namespace SGCorporation.UI.Workflows
                     Console.ReadLine();
                     return 0;
             }
-
-
         }
     }
 }

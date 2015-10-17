@@ -27,7 +27,7 @@ namespace SGCorporation.UI.Workflows
                 if (response1.Success == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("That date does not exist");
+                    Console.WriteLine("Invalid input format or that date does not exist");
                     Console.WriteLine();
                 }
             } while (response1.Success == false);
@@ -48,16 +48,16 @@ namespace SGCorporation.UI.Workflows
             Console.WriteLine();
             Console.WriteLine("Order Number:                    {0} " +
                                   "\nCustomer Name:                   {1} " +
-                                  "\nState Name:                      {2}" +
-                                  "\nTax Rate:                        {3}" +
-                                  "\nProduct Type:                    {4}" +
+                                  "\nState Name:                      {2} " +
+                                  "\nTax Rate:                        {3} " +
+                                  "\nProduct Type:                    {4} " +
                                   "\nArea:                            {5} " +
                                   "\nCost Per Square Foot:           {6:c} " +
                                   "\nLabor Cost Per Square Foot:     {7:c} " +
                                   "\nMaterial Cost:                  {8:c} " +
                                   "\nLabor Cost:                     {9:c} " +
                                   "\nTax:                            {10:c} " +
-                                  "\nTotal:                          {11:c}",
+                                  "\nTotal:                          {11:c} ",
                                   orderToRemove.OrderNumber,
                                   orderToRemove.CustomerName,
                                   orderToRemove.StateName,
@@ -72,7 +72,7 @@ namespace SGCorporation.UI.Workflows
                                   orderToRemove.Total);
 
             Console.WriteLine();
-            Console.Write("Are you sure you want to remove the above order? (Y/N)  ");
+            Console.Write("Are you sure you want to remove the above order? (Y/N) ");
             string response = Console.ReadLine();
 
             if (response.ToUpper() == "Y")
@@ -84,15 +84,13 @@ namespace SGCorporation.UI.Workflows
             else
             {
                 Console.WriteLine();
-                Console.WriteLine("Remove order cancelled");
+                Console.WriteLine("Order removal process cancelled");
             }
 
             Console.WriteLine();
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
-
-
 
         public DateTime PromptForDate()
         {
@@ -100,24 +98,14 @@ namespace SGCorporation.UI.Workflows
 
             string input = Console.ReadLine();
 
-            string[] format =
-            {
-                "M/d/yyyy", "MM/dd/yyyy",
-                "MMddyyyy", "MM-dd-yyyy",
-                "M-d-yyyy", "Mdyy", "MM dd yyyy", "M d yy"
-            };
+            DateTime date;
 
-            DateTime date = DateTime.ParseExact(input,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
-
-
+            DateTime.TryParse(input, out date);
+            
             return date.Date;
 
         }
-
-
+        
         public int PromptForOrderNo()
         {
             Console.Write("Enter the order number: ");

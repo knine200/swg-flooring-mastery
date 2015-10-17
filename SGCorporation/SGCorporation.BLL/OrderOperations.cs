@@ -36,12 +36,12 @@ namespace SGCorporation.BLL
             if (orders == null)
             {
                 response.Success = false;
-                response.Message = "There are no orders for the input date";
+                response.Message = "There are no orders for that date";
                 return response;
             }
 
             response.Success = true;
-            response.Message = "All orders for the input date have been retrieved";
+            response.Message = "All orders for that date have been retrieved";
 
             foreach (Order order in orders)
             {
@@ -93,6 +93,7 @@ namespace SGCorporation.BLL
                 string customerNameInput = Console.ReadLine();
                 response = ValidInputCheckString(customerNameInput);
                 Console.WriteLine(response.Message);
+                Console.WriteLine();
 
                 if (response.Success)
                 {
@@ -104,6 +105,7 @@ namespace SGCorporation.BLL
 
             do
             {
+                Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
                 Console.Write("Input the State Abbreviation: ");
                 string stateName = Console.ReadLine();
 

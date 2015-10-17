@@ -77,8 +77,8 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine("{0} is an invalid choice", choice);
                     Console.WriteLine("Try again");
                     Console.WriteLine();
-                    Console.WriteLine("Press Enter to continue...");
-                    Console.ReadLine();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
                     break;
             }
         }

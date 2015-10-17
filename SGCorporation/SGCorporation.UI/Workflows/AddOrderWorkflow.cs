@@ -39,8 +39,8 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine("Tax:                           {0:c}", response.CreateOrderInfo.Tax);
                 Console.WriteLine("Total:                         {0:c}", response.CreateOrderInfo.Total);
                 Console.WriteLine();
-                Console.WriteLine("Press Enter to continue...");
-                Console.ReadLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
 
         }
