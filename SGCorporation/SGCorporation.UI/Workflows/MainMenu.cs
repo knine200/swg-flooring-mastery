@@ -15,15 +15,23 @@ namespace SGCorporation.UI.Workflows
             do
             {
                 Console.Clear();
-                Console.WriteLine("WELCOME TO SG CORP!");
-                Console.WriteLine("---------------------");
-                Console.WriteLine("1. Display Orders");
-                Console.WriteLine("2. Add an Order");
-                Console.WriteLine("3. Edit an Order");
-                Console.WriteLine("4. Remove an Order");
+                Console.WriteLine("############### SG CORPORATION FLOORING APP ##############");
+                Console.WriteLine("#");
+                Console.WriteLine("#");
+                Console.Write("#");
+                Console.WriteLine("  1. Display Orders");
+                Console.Write("#");
+                Console.WriteLine("  2. Add an Order");
+                Console.Write("#");
+                Console.WriteLine("  3. Edit an Order");
+                Console.Write("#");
+                Console.WriteLine("  4. Remove an Order");
+                Console.Write("#");
                 Console.WriteLine();
-                Console.WriteLine("(Q) to Quit");
-                Console.WriteLine();
+                Console.WriteLine("#" + "  (Q) to Quit...");
+                Console.WriteLine("#");
+                Console.WriteLine("#");
+                Console.WriteLine("##########################################################");
                 Console.WriteLine();
                 Console.Write("Enter Choice: ");
 
@@ -59,7 +67,7 @@ namespace SGCorporation.UI.Workflows
                     rwf.Execute();
                     break;
                 default:
-                    Console.WriteLine("{0} is an invalid entry!", choice);
+                    Console.WriteLine("{0} is an invalid entry", choice);
                     Console.WriteLine("Press Enter to continue....");
                     Console.ReadLine();
                     break;

@@ -44,30 +44,30 @@ namespace SGCorporation.BLL
             if (orders == null)
             {
                 response.Success = false;
-                response.Message = "There is no orders for this date";
+                response.Message = "There are no orders for this date";
                 return response;
             }
 
             response.Success = true;
-            response.Message = "You got all the orders for the date";
+            response.Message = "You've retrieved all orders for this date";
 
             foreach (Order order in orders)
             {
                 Console.WriteLine();
 
 
-                Console.WriteLine("OrderNumber: {0} " +
-                                  "\nCustomerName: {1} " +
-                                  "\nStateName: {2}" +
-                                  "\nTaxRate: {3}" +
-                                  "\nProductType: {4}" +
-                                  "\nArea: {5} " +
-                                  "\nCostPerSquareFoot: {6:c} " +
-                                  "\nLaborCostPerSquareFoot: {7:c} " +
-                                  "\nMaterialCost: {8:c} " +
-                                  "\nLaborCost: {9:c} " +
-                                  "\nTax: {10:c} " +
-                                  "\nTotal: {11:c}",
+                Console.WriteLine("Order Number:                    {0} " +
+                                  "\nCustomer Name:                   {1} " +
+                                  "\nState Name:                      {2}" +
+                                  "\nTax Rate:                        {3}" +
+                                  "\nProduct Type:                    {4}" +
+                                  "\nArea:                            {5} " +
+                                  "\nCost Per Square Foot:           {6:c} " +
+                                  "\nLabor Cost Per Square Foot:     {7:c} " +
+                                  "\nMaterial Cost:                  {8:c} " +
+                                  "\nLabor Cost:                     {9:c} " +
+                                  "\nTax:                            {10:c} " +
+                                  "\nTotal:                          {11:c}",
                     order.OrderNumber,
                     order.CustomerName,
                     order.StateName,
@@ -195,18 +195,18 @@ namespace SGCorporation.BLL
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
             Console.WriteLine();
-            Console.WriteLine("OrderNumber: {0} " +
-                              "\nCustomerName: {1} " +
-                              "\nStateName: {2}" +
-                              "\nTaxRate: {3}" +
-                              "\nProductType: {4}" +
-                              "\nArea: {5} " +
-                              "\nCostPerSquareFoot: {6:c} " +
-                              "\nLaborCostPerSquareFoot: {7:c} " +
-                              "\nMaterialCost: {8:c} " +
-                              "\nLaborCost: {9:c} " +
-                              "\nTax: {10:c} " +
-                              "\nTotal: {11:c}",
+            Console.WriteLine("Order Number:                    {0} " +
+                              "\nCustomer Name:                   {1} " +
+                              "\nState Name:                      {2}" +
+                              "\nTax Rate:                        {3}" +
+                              "\nProduct Type:                    {4}" +
+                              "\nArea:                            {5} " +
+                              "\nCost Per Square Foot:           {6:c} " +
+                              "\nLabor Cost Per Square Foot:     {7:c} " +
+                              "\nMaterial Cost:                  {8:c} " +
+                              "\nLabor Cost:                     {9:c} " +
+                              "\nTax:                            {10:c} " +
+                              "\nTotal:                          {11:c}",
                 newOrder.OrderNumber,
                 newOrder.CustomerName,
                 newOrder.StateName,

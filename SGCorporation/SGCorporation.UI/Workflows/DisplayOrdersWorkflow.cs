@@ -55,10 +55,14 @@ namespace SGCorporation.UI.Workflows
             if (response.Success)
             {
                 Console.WriteLine(response.Message);
-                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine(response.Message);
             }
 
-            Console.WriteLine(response.Message);
+            Console.WriteLine();
+            Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
 
         }
