@@ -34,7 +34,9 @@ namespace SGCorporation.UI.Workflows
 
                 if (response.Success == false)
                 {
-                    Console.WriteLine("This date does not exist!");
+                    Console.WriteLine();
+                    Console.WriteLine("That date does not exist");
+                    Console.WriteLine();
                 }
             } while (response.Success == false);
 
@@ -46,7 +48,8 @@ namespace SGCorporation.UI.Workflows
 
                 if (order == null)
                 {
-                    Console.WriteLine("That order number does not exist. Try again.");
+                    Console.WriteLine();
+                    Console.WriteLine("That order number does not exist");
                     Console.WriteLine();
                 }
             } while (order == null);
@@ -100,8 +103,6 @@ namespace SGCorporation.UI.Workflows
 
         }
 
-
-
         public int PromptForOrderNo()
         {
             Console.Write("Enter the order number: ");
@@ -153,6 +154,7 @@ namespace SGCorporation.UI.Workflows
 
                     if (decimal.TryParse(input, out inputAmount))
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
                     }
@@ -180,6 +182,7 @@ namespace SGCorporation.UI.Workflows
 
                     if (decimal.TryParse(input1, out inputAmount))
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
                     }
@@ -210,6 +213,7 @@ namespace SGCorporation.UI.Workflows
 
                     if (decimal.TryParse(input3, out inputAmount))
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
                     }
@@ -221,7 +225,8 @@ namespace SGCorporation.UI.Workflows
                     return input3;
 
                 default:
-                    Console.WriteLine("Invalid string");
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid entry");
                     return Console.ReadLine();
 
             }

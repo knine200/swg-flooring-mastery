@@ -16,9 +16,6 @@ namespace SGCorporation.BLL
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
         public OrderRepositoryFactory factory;
-        
-
-        //public OrderRepositoryFactory factory;
 
         public OrderOperations()
         {
@@ -27,8 +24,6 @@ namespace SGCorporation.BLL
             factory = new OrderRepositoryFactory();
 
         }
-
-        
 
         public Response GetAllOrders(DateTime OrderDate)
         {
@@ -41,12 +36,12 @@ namespace SGCorporation.BLL
             if (orders == null)
             {
                 response.Success = false;
-                response.Message = "There are no orders for this date";
+                response.Message = "There are no orders for the input date";
                 return response;
             }
 
             response.Success = true;
-            response.Message = "You've retrieved all orders for this date";
+            response.Message = "All orders for the input date have been retrieved";
 
             foreach (Order order in orders)
             {
@@ -90,8 +85,6 @@ namespace SGCorporation.BLL
             Response response = new Response();
             Order newOrder = new Order();
 
-
-
             newOrder.OrderNumber = 1;
 
             do
@@ -125,22 +118,19 @@ namespace SGCorporation.BLL
                     {
                         newOrder.StateName = stateName.ToUpper();
                         Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-                        newOrder.TaxRate = stateTaxObject.TaxRate/100;
+                        newOrder.TaxRate = stateTaxObject.TaxRate / 100;
                     }
 
                 }
                 else
                 {
                     response = ValidInputCheckString("1");
-                    Console.WriteLine("Invalid state selected!!");
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid state");
+                    Console.WriteLine();
                 }
 
-
             } while (response.Success == false);
-
-
-            //Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-            //newOrder.TaxRate = stateTaxObject.TaxRate / 100;
 
             do
             {
@@ -159,10 +149,7 @@ namespace SGCorporation.BLL
                     newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
 
                 }
-
-
             } while (response.Success == false);
-
 
             do
             {
@@ -179,16 +166,9 @@ namespace SGCorporation.BLL
 
             } while (response.Success == false);
 
-            
-
-            //newOrder.CostPerSquareFoot = ProductTypeObject.CostPerSquareFoot;
-            //newOrder.LaborCostPerSquareFoot = ProductTypeObject.LaborCostPerSquareFoot;
-
-
-
-            newOrder.MaterialCost = newOrder.Area*newOrder.CostPerSquareFoot;
-            newOrder.LaborCost = newOrder.Area*newOrder.LaborCostPerSquareFoot;
-            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost)*newOrder.TaxRate;
+            newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
+            newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
+            newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost) * newOrder.TaxRate;
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
             Console.WriteLine();
@@ -259,7 +239,7 @@ namespace SGCorporation.BLL
                 }
             }
             return response;
-            
+
         }
 
 
@@ -285,13 +265,13 @@ namespace SGCorporation.BLL
                 response.EditOrderInfo.LaborCost = Order.LaborCost;
                 response.EditOrderInfo.Tax = Order.Tax;
                 response.EditOrderInfo.Total = Order.Total;
-                response.Message = "You have completed the editing of your Order!";
+                response.Message = "The order has been edited";
 
             }
             else
             {
                 response.Success = false;
-                response.Message = "Your Order does not exist!";
+                response.Message = "That order does not exist";
             }
 
             return response;
@@ -307,12 +287,12 @@ namespace SGCorporation.BLL
 
                 repo.RemoveOrder(OrderDate, Order);
                 response.Success = true;
-                response.Message = "You have deleted your Order!";
+                response.Message = "The order has been deleted";
             }
             else
             {
                 response.Success = false;
-                response.Message = "Your Order number does not exist!";
+                response.Message = "That order number does not exist";
 
             }
 
@@ -369,13 +349,12 @@ namespace SGCorporation.BLL
                 if (userInput.Contains(item))
                 {
                     response.Success = false;
-                    
-                    response.Message = "Invalid entry. Only alphabetical characters allowed. Try again.";
+
+                    response.Message = "Invalid entry\nOnly alphabetical characters allowed";
                     return response;
                 }
             }
             response.Success = true;
-            //response.Message = "Valid entry";
             return response;
         }
 
@@ -394,7 +373,7 @@ namespace SGCorporation.BLL
                 if (userInput.Contains(item))
                 {
                     response.Success = false;
-                    response.Message = "Invalid entry. Only number characters allowed. Try again.";
+                    response.Message = "Invalid entry\nOnly number characters allowed";
                     return response;
                 }
             }

@@ -73,8 +73,11 @@ namespace SGCorporation.UI.Workflows
                     rwf.Execute();
                     break;
                 default:
-                    Console.WriteLine("{0} is an invalid entry", choice);
-                    Console.WriteLine("Press Enter to continue....");
+                    Console.WriteLine();
+                    Console.WriteLine("{0} is an invalid choice", choice);
+                    Console.WriteLine("Try again");
+                    Console.WriteLine();
+                    Console.WriteLine("Press Enter to continue...");
                     Console.ReadLine();
                     break;
             }

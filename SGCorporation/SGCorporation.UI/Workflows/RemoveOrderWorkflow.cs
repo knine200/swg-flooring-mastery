@@ -26,7 +26,9 @@ namespace SGCorporation.UI.Workflows
                 response1 = ops.GetAllOrders(currentDate);
                 if (response1.Success == false)
                 {
-                    Console.WriteLine("This date does not exist!");
+                    Console.WriteLine();
+                    Console.WriteLine("That date does not exist");
+                    Console.WriteLine();
                 }
             } while (response1.Success == false);
 
@@ -36,7 +38,8 @@ namespace SGCorporation.UI.Workflows
                 orderToRemove = ops.GetOrderNo(currentDate, orderNo);
                 if (orderToRemove == null)
                 {
-                    Console.WriteLine("That order number does not exist. Try again.");
+                    Console.WriteLine();
+                    Console.WriteLine("That order number does not exist");
                     Console.WriteLine();
                 }
             } while (orderToRemove == null);
@@ -125,9 +128,6 @@ namespace SGCorporation.UI.Workflows
             {
                 return OrderNo;
             }
-
-            Console.WriteLine("Try again");
-            Console.ReadLine();
 
             return OrderNo;
         }
