@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SGCorporation.Data;
-using SGCorporation.Data.Mocks;
 using SGCorporation.Models;
 using SGCorporation.Models.Interfaces;
 
@@ -16,8 +15,6 @@ namespace SGCorporation.BLL
     {
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
-        public TaxRepoTest TaxRepoTest;
-        public ProductRepoTest ProductRepoTest;
         public OrderRepositoryFactory factory;
         
 

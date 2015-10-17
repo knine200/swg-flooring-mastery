@@ -27,26 +27,17 @@ namespace SGCorporation.Data
             });
         }
 
-
-
-
         public List<Order> GetAllOrders(DateTime date)
         {
             return _order;
         }
 
-
         public void Add(Order newOrder)
         {
-            // ternary operator is saying:
-            // if there are any contacts return the max contact id and add 1 to set our new contact id
-            // else set to 1
             newOrder.OrderNumber = (_order.Any()) ? _order.Max(c => c.OrderNumber) + 1 : 1;
 
             _order.Add(newOrder);
         }
-
-
 
         public void Delete(int OrderNumber)
         {
@@ -58,7 +49,6 @@ namespace SGCorporation.Data
             Delete(order.OrderNumber);
             _order.Add(order);
         }
-
 
         public Order GetByNo(int OrderNumber)
         {
@@ -77,8 +67,7 @@ namespace SGCorporation.Data
 
         public void RemoveOrder(DateTime OrderDate, Order OrderToUpdate)
         {
-            
-        }
 
+        }
     }
 }

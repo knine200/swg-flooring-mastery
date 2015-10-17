@@ -58,10 +58,7 @@ namespace SGCorporation.UI.Workflows
             Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
             order.TaxRate = currentStateTax.TaxRate;
 
-
             order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
-
-
 
             string productType = order.ProductType;
             Product currentProduct = ops.ReturnProduct(productType);
@@ -71,8 +68,6 @@ namespace SGCorporation.UI.Workflows
             order.LaborCostPerSquareFoot = currentProduct.LaborCostPerSquareFoot;
 
             order.Area = PromptToEditDecimal("Area", order.Area);
-
-
 
             order.MaterialCost = order.Area * order.CostPerSquareFoot;
             order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
@@ -89,8 +84,6 @@ namespace SGCorporation.UI.Workflows
 
             string input = Console.ReadLine();
 
-
-
             string[] format =
             {
                     "M/d/yyyy", "MM/dd/yyyy",
@@ -103,9 +96,7 @@ namespace SGCorporation.UI.Workflows
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None);
 
-
             return date.Date;
-
 
         }
 
@@ -135,7 +126,7 @@ namespace SGCorporation.UI.Workflows
                     answer = "Y";
                 }
                 else if (answer.ToUpper() == "N")
-                { 
+                {
                     return propertyValue;
                 }
 
@@ -143,7 +134,6 @@ namespace SGCorporation.UI.Workflows
 
             switch (propertyName)
             {
-
                 case "CustomerName":
                     string input;
                     do
@@ -156,12 +146,8 @@ namespace SGCorporation.UI.Workflows
                         if (response.Success == false)
                         {
                             Console.WriteLine(response.Message);
-
                         }
-
-
                     } while (response.Success == false);
-
 
                     decimal inputAmount;
 
@@ -177,14 +163,8 @@ namespace SGCorporation.UI.Workflows
                     }
                     return input.ToUpper();
 
-
-
-
-
                 case "StateName":
-
                     string input1;
-
                     do
                     {
                         Console.Write("Enter a new {0}: ", propertyName);
@@ -196,8 +176,6 @@ namespace SGCorporation.UI.Workflows
                         {
                             Console.WriteLine(response.Message);
                         }
-
-
                     } while (response.Success == false);
 
                     if (decimal.TryParse(input1, out inputAmount))
@@ -212,11 +190,8 @@ namespace SGCorporation.UI.Workflows
                     }
                     return input1;
 
-
                 case "ProductType":
-
                     string input2;
-
                     do
                     {
                         Console.Write("Enter a new {0}: ", propertyName);
@@ -224,15 +199,12 @@ namespace SGCorporation.UI.Workflows
 
                         response = ops.ValidInputCheckString(input2);
 
-
                         if (response.Success == false)
                         {
                             Console.WriteLine(response.Message);
                         }
 
-
                     } while (response.Success == false);
-
 
                     string input3 = ops.UppercaseFirst(input2);
 
@@ -248,18 +220,15 @@ namespace SGCorporation.UI.Workflows
                     }
                     return input3;
 
-
                 default:
                     Console.WriteLine("Invalid string");
                     return Console.ReadLine();
-
 
             }
         }
 
         public decimal PromptToEditDecimal(string propertyName, decimal propertyValue)
         {
-            //bool confirmation;
             string answer;
 
             do
@@ -277,14 +246,9 @@ namespace SGCorporation.UI.Workflows
                 }
             } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N");
 
-
-
             switch (propertyName)
             {
-
-
                 case "Area":
-
                     string input;
                     do
                     {
@@ -299,8 +263,6 @@ namespace SGCorporation.UI.Workflows
 
                     } while (response.Success == false);
 
-
-
                     decimal inputAmount;
                     if (decimal.TryParse(input, out inputAmount))
                     {
@@ -314,6 +276,7 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
                     return 0;
+
                 default:
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();

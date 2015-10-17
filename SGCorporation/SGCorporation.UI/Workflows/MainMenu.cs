@@ -15,25 +15,31 @@ namespace SGCorporation.UI.Workflows
             do
             {
                 Console.Clear();
+                Console.WriteLine("##########################################################");
+                Console.WriteLine("##########################################################");
                 Console.WriteLine("############### SG CORPORATION FLOORING APP ##############");
-                Console.WriteLine("#");
-                Console.WriteLine("#");
-                Console.Write("#");
-                Console.WriteLine("  1. Display Orders");
-                Console.Write("#");
-                Console.WriteLine("  2. Add an Order");
-                Console.Write("#");
-                Console.WriteLine("  3. Edit an Order");
-                Console.Write("#");
-                Console.WriteLine("  4. Remove an Order");
-                Console.Write("#");
+                Console.WriteLine("###############              BY             ##############");
+                Console.WriteLine("###############         JIM & KOSHIN        ##############");
+                Console.WriteLine("##########################################################");
+                Console.WriteLine("##########################################################");
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
+                Console.Write(" ");
+                Console.WriteLine("                   (1) Display Orders");
+                Console.Write(" ");
+                Console.WriteLine("                   (2) Add an Order");
+                Console.Write(" ");
+                Console.WriteLine("                   (3) Edit an Order");
+                Console.Write(" ");
+                Console.WriteLine("                   (4) Remove an Order");
+                Console.Write(" ");
                 Console.WriteLine();
-                Console.WriteLine("#" + "  (Q) to Quit...");
-                Console.WriteLine("#");
-                Console.WriteLine("#");
+                Console.WriteLine(" " + "                   (Q) to Quit");
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
                 Console.WriteLine("##########################################################");
                 Console.WriteLine();
-                Console.Write("Enter Choice: ");
+                Console.Write("                     Enter Choice: ");
 
                 input = Console.ReadLine();
 
@@ -71,12 +77,7 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine("Press Enter to continue....");
                     Console.ReadLine();
                     break;
-
             }
-
-
-
-
         }
     }
 }

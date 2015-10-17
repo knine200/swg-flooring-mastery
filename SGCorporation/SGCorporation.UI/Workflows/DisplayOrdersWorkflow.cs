@@ -11,7 +11,7 @@ namespace SGCorporation.UI.Workflows
 {
     public class DisplayOrdersWorkflow
     {
-       // private Order _currentOrder;
+        // private Order _currentOrder;
 
         public void Execute()
         {
@@ -23,8 +23,8 @@ namespace SGCorporation.UI.Workflows
         public DateTime GetDateFromUser()
         {
 
-            Console.Clear();  
-                  
+            Console.Clear();
+
             Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
             string input = Console.ReadLine();
@@ -49,7 +49,7 @@ namespace SGCorporation.UI.Workflows
         public void DisplayOrderInformation(DateTime userDate)
         {
             OrderOperations ops = new OrderOperations();
-            
+
             Response response = ops.GetAllOrders(userDate);
 
             if (response.Success)
@@ -67,13 +67,5 @@ namespace SGCorporation.UI.Workflows
 
         }
 
-        public void PrintOrderInformation(OrderSlip OrderSlip)
-        {
-            Console.Clear();
-            Console.WriteLine("Order Information");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Order Number: {0}", OrderSlip.Order.OrderNumber);
-            Console.WriteLine("Customer Name: {0}", OrderSlip.Order.CustomerName);
-        }
     }
 }

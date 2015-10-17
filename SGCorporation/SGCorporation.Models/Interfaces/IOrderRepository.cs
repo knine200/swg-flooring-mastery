@@ -14,8 +14,8 @@ namespace SGCorporation.Models.Interfaces
 
         void EditOrder(DateTime date, Order order);
 
-         Order GetOrder(DateTime date, int number);
+        Order GetOrder(DateTime date, int number);
 
-         void RemoveOrder(DateTime OrderDate, Order OrderToUpdate);
+        void RemoveOrder(DateTime OrderDate, Order OrderToUpdate);
     }
 }

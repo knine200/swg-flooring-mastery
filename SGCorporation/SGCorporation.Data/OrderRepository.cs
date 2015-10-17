@@ -13,27 +13,10 @@ namespace SGCorporation.Data
 {
     public class OrderRepository : IOrderRepository
     {
-        //private string _value = ConfigurationManager.AppSettings["Option"];
-
         public string GetFilePath(DateTime OrderDate)
         {
-            //if (_value == "Test")
-            //{
-
-
-
-            //    //File names vary depending on the date.
-            //    //File names are always in the following format Orders_MMDDYYYY.
-            //    //The DateTime object is accepted and converted to a string.
-            //    //Then it's concatenated to form the file path.
             string ordersFilePath = @"DataFiles\Orders_" + OrderDate.ToString("MMddyyyy") + ".txt";
             return ordersFilePath;
-            //}
-            //else
-            //{
-            //string ordersFilePath = @"DataFiles\Orders_" + OrderDate.ToString("MMddyyyy") + ".txt";
-            //return ordersFilePath;
-            //}
         }
 
         public List<Order> GetAllOrders(DateTime OrderDate)

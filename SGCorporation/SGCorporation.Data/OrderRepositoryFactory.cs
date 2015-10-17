@@ -10,9 +10,7 @@ namespace SGCorporation.Data
 {
     public class OrderRepositoryFactory
     {
-        // private string _value = ConfigurationManager.AppSettings["Option"];
-
-        public  IOrderRepository CreateOrderRepository()
+        public IOrderRepository CreateOrderRepository()
         {
 
             switch (ConfigurationManager.AppSettings["mode"].ToLower())

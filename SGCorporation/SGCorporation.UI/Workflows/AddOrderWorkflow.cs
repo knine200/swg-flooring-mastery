@@ -27,11 +27,11 @@ namespace SGCorporation.UI.Workflows
                 Console.WriteLine();
                 Console.WriteLine("New order created!");
                 Console.WriteLine("Order number:                  {0}", response.CreateOrderInfo.OrderNumber);
-                Console.WriteLine("Customer Name:                 {0}", response.CreateOrderInfo.CustomerName);
-                Console.WriteLine("State Abbreviation:            {0}", response.CreateOrderInfo.StateName.ToUpper());
-                Console.WriteLine("TaxRate:                       {0}", response.CreateOrderInfo.TaxRate);
-                Console.WriteLine("Product Type:                  {0}", response.CreateOrderInfo.ProductType);
-                Console.WriteLine("Area:                          {0}", response.CreateOrderInfo.Area);
+                Console.WriteLine("Customer Name:                  {0}", response.CreateOrderInfo.CustomerName);
+                Console.WriteLine("State Abbreviation:             {0}", response.CreateOrderInfo.StateName.ToUpper());
+                Console.WriteLine("TaxRate:                        {0}", response.CreateOrderInfo.TaxRate);
+                Console.WriteLine("Product Type:                   {0}", response.CreateOrderInfo.ProductType);
+                Console.WriteLine("Area:                           {0}", response.CreateOrderInfo.Area);
                 Console.WriteLine("Cost Per Square Foot:          {0:c}", response.CreateOrderInfo.CostPerSquareFoot);
                 Console.WriteLine("Labor Cost Per Square Foot:    {0:c}", response.CreateOrderInfo.LaborCostPerSquareFoot);
                 Console.WriteLine("Material Cost:                 {0:c}", response.CreateOrderInfo.MaterialCost);
