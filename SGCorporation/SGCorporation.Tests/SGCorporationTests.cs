@@ -13,7 +13,8 @@ namespace SGCorporation.Tests
     public class SGCorporationTests
     {
         private Program _program;
-        private OrderOperations _orderOperations;
+
+      
 
         [SetUp]
         public void BeforeEachTest()
@@ -22,12 +23,16 @@ namespace SGCorporation.Tests
             Console.WriteLine("SetUp called...");
         }
 
-        [Test]
-        public void UppercaseFirst_String_ReturnString()
-        {
-            string result = _orderOperations.UppercaseFirst("wood");
 
-            Assert.AreEqual("Wood", result);
+        [TestCase("wood", "Wood")]
+
+        public void UppercaseFirst_String_ReturnString(string a, string b)
+        {
+            OrderOperations target = new OrderOperations();
+
+            string result = target.UppercaseFirst(a);
+
+            Assert.AreEqual(b, result);
         }
     }
 }

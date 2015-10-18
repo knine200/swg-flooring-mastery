@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using SGCorporation.BLL;
 using SGCorporation.Models;
 
@@ -11,6 +12,7 @@ namespace SGCorporation.UI.Workflows
 {
     public class DisplayOrdersWorkflow
     {
+        ErrorLog oErrorLog  = new ErrorLog();
 
         public void Execute()
         {
@@ -23,9 +25,26 @@ namespace SGCorporation.UI.Workflows
         {
             Console.Clear();
 
-            Console.Write("Enter the date for your order (MM/DD/YYYY): ");
+            string input = "";
+            DateTime date1;
+            try
+            {
+                Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
-            string input = Console.ReadLine();
+
+                 input = Console.ReadLine();
+                //DateTime date;
+
+               // DateTime.TryParse(input, out date);
+                DateTime.TryParse(input, out date1);
+
+                throw new Exception();
+
+            }
+            catch (Exception ex)
+            {
+                oErrorLog.WriteErrorLog(ex.ToString());
+            }
 
             DateTime date;
 
