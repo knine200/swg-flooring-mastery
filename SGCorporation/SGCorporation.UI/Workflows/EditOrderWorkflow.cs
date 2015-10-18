@@ -43,33 +43,33 @@ namespace SGCorporation.UI.Workflows
             } while (response.Success == false);
 
 
- //           do
-//            {
+            do
+            {
                 int orderNo = PromptForOrderNo();
                 order = ops.GetOrderNo(currentDate, orderNo);
 
-            //    if (order == null)
-            //    {
-            //        Console.WriteLine();
-            //        Console.WriteLine("That order number does not exist");
-            //        Console.WriteLine();
-            //    }
-            //} while (order == null);
+                if (order == null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("That order number does not exist");
+                    Console.WriteLine();
+                }
+            } while (order == null);
 
-            try
-            {
-                order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+            //try
+            //{
+            //    order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
 
-                throw new Exception();
-            }
-            catch (Exception ex)
-            {
-               Console.WriteLine( oErrorLog.WriteErrorLog(ex.ToString()));
-            }
+            //    throw new Exception();
+            //}
+            //catch (Exception ex)
+            //{
+            //   Console.WriteLine( oErrorLog.WriteErrorLog(ex.ToString()));
+            //}
 
 
 
-            //order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+            order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
             order.StateName = PromptToEditStrings("StateName", order.StateName);
             string stateName = order.StateName;
 

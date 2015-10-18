@@ -85,13 +85,18 @@ namespace SGCorporation.BLL
 
             Response response = new Response();
             Order newOrder = new Order();
+            string customerNameInput;
+            string stateInput;
+            string productType;
+            string area;
 
             newOrder.OrderNumber = 1;
 
             do
             {
                 Console.Write("Input the Customer Name: ");
-                string customerNameInput = Console.ReadLine();
+                customerNameInput = Console.ReadLine();
+
                 response = ValidInputCheckString(customerNameInput);
                 Console.WriteLine(response.Message);
 
@@ -100,14 +105,15 @@ namespace SGCorporation.BLL
                     newOrder.CustomerName = customerNameInput;
                 }
 
-            } while (response.Success == false);
+
+            } while (response.Success == false || customerNameInput == null);
 
 
             do
             {
                 Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
                 Console.Write("Input the State Abbreviation: ");
-                string stateInput = Console.ReadLine();
+                stateInput = Console.ReadLine();
                 string stateName = stateInput.ToUpper();
 
                 if (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
@@ -133,13 +139,13 @@ namespace SGCorporation.BLL
                     Console.WriteLine();
                 }
 
-            } while (response.Success == false);
+            } while (response.Success == false || stateInput == null);
 
             do
             {
                 Console.WriteLine("carpet     laminate     tile     wood");
                 Console.Write("Input the Product Type: ");
-                string productType = Console.ReadLine();
+                productType = Console.ReadLine();
 
                 response = ValidInputCheckString(productType);
                 Console.WriteLine(response.Message);
@@ -162,12 +168,12 @@ namespace SGCorporation.BLL
                     Console.WriteLine();
                 }
 
-            } while (response.Success == false);
+            } while (response.Success == false || productType == null);
 
             do
             {
                 Console.Write("Input the Area: ");
-                string area = Console.ReadLine();
+                area = Console.ReadLine();
                 response = ValidInputCheckDecimal(area);
                 Console.WriteLine(response.Message);
 
@@ -177,7 +183,7 @@ namespace SGCorporation.BLL
 
                 }
 
-            } while (response.Success == false);
+            } while (response.Success == false || area == null);
 
             newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
             newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
@@ -350,13 +356,20 @@ namespace SGCorporation.BLL
 
         public Response ValidInputCheckString(string userInput)
         {
+            Response response = new Response();
+            if (userInput == null)
+            {
+                response.Success = false;
+                return response;
+            }
+
             char[] undesirableChars =
             {
                 ' ', ',', '\n', '\t', ';', '/', '\\', '|', '0', '1', '2', '3', '4', '5', '6', '7',
                 '8', '9'
             };
 
-            Response response = new Response();
+
 
             foreach (var item in undesirableChars)
             {
