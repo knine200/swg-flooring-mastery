@@ -122,8 +122,7 @@ namespace SGCorporation.UI.Workflows
                 {
                     return propertyValue;
                 }
-
-            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N");
+            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
             switch (propertyName)
             {
@@ -243,7 +242,7 @@ namespace SGCorporation.UI.Workflows
                 {
                     return propertyValue;
                 }
-            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N");
+            } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
             switch (propertyName)
             {
