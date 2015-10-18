@@ -16,6 +16,7 @@ namespace SGCorporation.BLL
         public TaxRepository TaxRepo;
         public ProductRepository ProductRepo;
         public OrderRepositoryFactory factory;
+        public ErrorLog ErrorLog;
 
         public OrderOperations()
         {
@@ -313,6 +314,7 @@ namespace SGCorporation.BLL
 
         public Order GetOrderNo(DateTime OrderDate, int OrderNo)
         {
+
             var repo = factory.CreateOrderRepository();
             Order order = repo.GetOrder(OrderDate, OrderNo);
 
