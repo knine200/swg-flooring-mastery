@@ -10,6 +10,15 @@ namespace SGCorporation.UI.Workflows
 {
     public class AddOrderWorkflow
     {
+        public OrderOperations ops;
+        public Response response;
+
+        public AddOrderWorkflow()
+        {
+            ops = new OrderOperations();
+            response = new Response();
+        }
+
 
         public void Execute()
         {
@@ -19,13 +28,14 @@ namespace SGCorporation.UI.Workflows
         }
         public void OpenOrder()
         {
-            OrderOperations ops = new OrderOperations();
-            Response response = ops.CreateOrder();
+            //OrderOperations ops = new OrderOperations();
+            response = ops.CreateOrder();
 
             if (response.Success)
             {
                 Console.WriteLine();
                 Console.WriteLine("New order created!");
+
                 Console.WriteLine("Order number:                  {0}", response.CreateOrderInfo.OrderNumber);
                 Console.WriteLine("Customer Name:                  {0}", response.CreateOrderInfo.CustomerName);
                 Console.WriteLine("State Abbreviation:             {0}", response.CreateOrderInfo.StateName.ToUpper());

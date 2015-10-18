@@ -148,6 +148,7 @@ namespace SGCorporation.UI.Workflows
                         Console.Write("Enter a new {0}: ", propertyName);
                         input = Console.ReadLine();
 
+
                         response = ops.ValidInputCheckString(input);
 
                         if (response.Success == false)
@@ -165,7 +166,7 @@ namespace SGCorporation.UI.Workflows
                         Console.ReadLine();
                     }
 
-                    if (input == propertyValue)
+                    if (input == propertyValue || string.IsNullOrEmpty(input))
                     {
                         return propertyValue;
                     }
@@ -194,7 +195,7 @@ namespace SGCorporation.UI.Workflows
                         Console.ReadLine();
                     }
 
-                    if (input1 == propertyValue)
+                    if (input1 == propertyValue || string.IsNullOrEmpty(input1))
                     {
                         return propertyValue;
                     }
@@ -226,7 +227,7 @@ namespace SGCorporation.UI.Workflows
                         Console.ReadLine();
                     }
 
-                    if (input3 == propertyValue)
+                    if (input3 == propertyValue || string.IsNullOrEmpty(input3))
                     {
                         return propertyValue;
                     }

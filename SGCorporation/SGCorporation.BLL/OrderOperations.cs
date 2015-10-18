@@ -17,12 +17,16 @@ namespace SGCorporation.BLL
         public ProductRepository ProductRepo;
         public OrderRepositoryFactory factory;
         public ErrorLog ErrorLog;
+        public Order newOrder;
+        public Response response;
 
         public OrderOperations()
         {
             TaxRepo = new TaxRepository();
             ProductRepo = new ProductRepository();
             factory = new OrderRepositoryFactory();
+            newOrder = new Order();
+            response = new Response();
 
         }
 
@@ -83,8 +87,8 @@ namespace SGCorporation.BLL
         {
             var repo = factory.CreateOrderRepository();
 
-            Response response = new Response();
-            Order newOrder = new Order();
+          //  Response response = new Response();
+            //Order newOrder = new Order();
             string customerNameInput;
             string stateInput;
             string productType;
@@ -97,6 +101,11 @@ namespace SGCorporation.BLL
                 Console.Write("Input the Customer Name: ");
                 customerNameInput = Console.ReadLine();
 
+                if (string.IsNullOrEmpty(customerNameInput))
+                {
+                    customerNameInput = "1";
+                }
+
                 response = ValidInputCheckString(customerNameInput);
                 Console.WriteLine(response.Message);
 
@@ -106,7 +115,7 @@ namespace SGCorporation.BLL
                 }
 
 
-            } while (response.Success == false || customerNameInput == null);
+            } while (response.Success == false || customerNameInput == "1");
 
 
             do
@@ -143,14 +152,21 @@ namespace SGCorporation.BLL
 
             do
             {
-                Console.WriteLine("carpet     laminate     tile     wood");
+                Console.WriteLine("Carpet     Laminate     Tile     Wood");
                 Console.Write("Input the Product Type: ");
                 productType = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(productType))
+                {
+                    productType = "1";
+                }
+
 
                 response = ValidInputCheckString(productType);
                 Console.WriteLine(response.Message);
 
-                if (response.Success)
+                if (response.Success && (UppercaseFirst(productType) == "Wood" || UppercaseFirst(productType) == "Tile" || UppercaseFirst(productType) == "Carpet" ||
+                    UppercaseFirst(productType) == "Laminate"))
                 {
 
                     Product ProductTypeObject = ProductRepo.GetProduct(UppercaseFirst(productType));
@@ -168,12 +184,17 @@ namespace SGCorporation.BLL
                     Console.WriteLine();
                 }
 
-            } while (response.Success == false || productType == null);
+            } while (response.Success == false || productType == "1");
 
             do
             {
                 Console.Write("Input the Area: ");
                 area = Console.ReadLine();
+                if (string.IsNullOrEmpty(area))
+                {
+                    area = "a";
+                }
+
                 response = ValidInputCheckDecimal(area);
                 Console.WriteLine(response.Message);
 
