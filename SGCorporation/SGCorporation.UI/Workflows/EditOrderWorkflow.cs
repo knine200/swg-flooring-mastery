@@ -139,13 +139,30 @@ namespace SGCorporation.UI.Workflows
 
         public int PromptForOrderNo()
         {
-            Console.Write("Enter the order number: ");
-            string input = Console.ReadLine();
+            string input;
+            do
+            {
+                Console.Write("Enter the order number: ");
+                 input = Console.ReadLine();
 
+                if (string.IsNullOrEmpty(input))
+                {
+                    input = "a";
+                }
+
+                response = ops.ValidInputCheckDecimal(input);
+                Console.WriteLine(response.Message);
+
+                //int OrderNo = int.Parse(input);
+
+                //return OrderNo;
+
+            } while (response.Success == false);
 
             int OrderNo = int.Parse(input);
 
             return OrderNo;
+
         }
 
         public string PromptToEditStrings(string propertyName, string propertyValue)
@@ -320,7 +337,13 @@ namespace SGCorporation.UI.Workflows
                     {
                         Console.Write("Enter a new {0}: ", propertyName);
                         input = Console.ReadLine();
+                        if (string.IsNullOrEmpty(input))
+                        {
+                            input = "a";
+                        }
+
                         response = ops.ValidInputCheckDecimal(input);
+                       
 
                         if (response.Success == false)
                         {
