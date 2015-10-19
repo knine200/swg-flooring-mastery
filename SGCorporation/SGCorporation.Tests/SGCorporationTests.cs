@@ -8,7 +8,9 @@ using NUnit.Framework;
 using SGCorporation.BLL;
 using SGCorporation.Data;
 using SGCorporation.Models;
+using SGCorporation.Models.Interfaces;
 using SGCorporation.UI;
+using SGCorporation.UI.Workflows;
 
 namespace SGCorporation.Tests
 {
@@ -78,11 +80,11 @@ namespace SGCorporation.Tests
         }
 
         [Test]
-        public void GetOrderNo_OrderDateAndOrderNo_ReturnOrder()
+        public void PromptToEditStrings_PropertyNameAndValue_ReturnString()
         {
-            OrderOperations ops = new OrderOperations();
+            OrderRepoTest repoTest = new OrderRepoTest();
 
-            Order result = ops.GetOrderNo(DateTime.Parse("01012016").Date, 1);
+            var result = repoTest.GetByNo(1);
 
             Assert.AreEqual(1, result.OrderNumber);
         }
