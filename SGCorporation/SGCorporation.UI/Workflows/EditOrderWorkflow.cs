@@ -89,8 +89,7 @@ namespace SGCorporation.UI.Workflows
             }
             catch (Exception ex)
             {
-                Console.WriteLine(oErrorLog.WriteErrorLog(ex.ToString()));
-                Console.WriteLine("Invalid entry");
+                oErrorLog.WriteErrorLog(ex.ToString());
                 Console.ReadLine();
             }
 
