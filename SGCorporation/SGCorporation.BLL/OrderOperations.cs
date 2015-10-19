@@ -244,7 +244,7 @@ namespace SGCorporation.BLL
             string userInput = Console.ReadLine();
 
 
-            if (repo == new OrderRepository())
+            if (repo is OrderRepository)
             {
                 if (userInput.ToUpper() == "Y")
                 {
