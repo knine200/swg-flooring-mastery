@@ -204,7 +204,7 @@ namespace SGCorporation.BLL
 
                 }
 
-            } while (response.Success == false || area == null);
+            } while (response.Success == false || area == null || newOrder.Area < 0);
 
             newOrder.MaterialCost = newOrder.Area * newOrder.CostPerSquareFoot;
             newOrder.LaborCost = newOrder.Area * newOrder.LaborCostPerSquareFoot;
@@ -411,7 +411,7 @@ namespace SGCorporation.BLL
             char[] undesirableChars =
             {
                 ' ', ',', '\n', '\t', ';', '/', '\\', '|', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z',
+                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z','-'
             };
 
             Response response = new Response();

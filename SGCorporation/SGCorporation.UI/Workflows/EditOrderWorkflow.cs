@@ -283,10 +283,12 @@ namespace SGCorporation.UI.Workflows
                         if (inputAmount == propertyValue)
                         {
                             return propertyValue;
+                           
                         }
 
                         return inputAmount;
                     }
+
                     Console.WriteLine("Invalid entry");
                     Console.ReadLine();
                     return 0;
