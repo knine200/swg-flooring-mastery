@@ -60,7 +60,7 @@ namespace SGCorporation.UI.Workflows
             {
                 order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
 
-                order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+                //order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
                 order.StateName = PromptToEditStrings("StateName", order.StateName);
                 string stateName = order.StateName;
 
@@ -177,6 +177,11 @@ namespace SGCorporation.UI.Workflows
                         Console.Write("Enter a new {0}: ", propertyName);
                         input = Console.ReadLine();
 
+                        if (string.IsNullOrEmpty(input))
+                        {
+                            input = "1";
+                        }
+
 
                         response = ops.ValidInputCheckString(input);
 
@@ -199,15 +204,23 @@ namespace SGCorporation.UI.Workflows
                     {
                         return propertyValue;
                     }
+
                     return input.ToUpper();
 
                 case "StateName":
                     string input1;
                     do
                     {
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
+                        Console.ResetColor();
                         Console.Write("Enter a new {0}: ", propertyName);
                         input1 = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(input1) || (input1.ToUpper() != "PA" && input1.ToUpper() != "IN" && input1.ToUpper() != "MI" && input1.ToUpper() != "OH"))
+                        {
+                            input1 = "1";
+                        }
 
                         response = ops.ValidInputCheckString(input1);
 
@@ -228,20 +241,28 @@ namespace SGCorporation.UI.Workflows
                     {
                         return propertyValue;
                     }
-                    return input1;
+                    return input1.ToUpper();
 
                 case "ProductType":
                     string input2;
                     do
                     {
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Carpet     Laminate     Tile     Wood");
+                        Console.ResetColor();
                         Console.Write("Enter a new {0}: ", propertyName);
                         input2 = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(input2) ||( input2.ToUpper() != "CARPET" && input2.ToUpper() != "TILE" && input2.ToUpper() != "WOOD" &&
+                            input2.ToUpper() != "LAMINATE" ))
+                        {
+                            input2 = "1";
+                        }
 
                         response = ops.ValidInputCheckString(input2);
 
                         if (response.Success == false)
-                        {
+                        { 
                             Console.WriteLine(response.Message);
                         }
 
@@ -287,11 +308,13 @@ namespace SGCorporation.UI.Workflows
                 {
                     return propertyValue;
                 }
+
             } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
             switch (propertyName)
             {
                 case "Area":
+
                     string input;
                     do
                     {
@@ -306,7 +329,9 @@ namespace SGCorporation.UI.Workflows
 
                     } while (response.Success == false);
 
+
                     decimal inputAmount;
+
                     if (decimal.TryParse(input, out inputAmount))
                     {
                         if (inputAmount == propertyValue)
@@ -318,9 +343,10 @@ namespace SGCorporation.UI.Workflows
                         return inputAmount;
                     }
 
-                    Console.WriteLine("Invalid entry");
-                    Console.ReadLine();
+                    //Console.WriteLine("Invalid entry");
+                    //Console.ReadLine();
                     return 0;
+                    
 
                 default:
                     Console.WriteLine("Invalid entry");
