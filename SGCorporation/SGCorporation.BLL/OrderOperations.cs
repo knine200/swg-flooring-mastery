@@ -50,6 +50,8 @@ namespace SGCorporation.BLL
 
             foreach (Order order in orders)
             {
+                
+
                 Console.WriteLine();
 
 
@@ -78,6 +80,7 @@ namespace SGCorporation.BLL
                     order.Tax,
                     order.Total);
                 Console.WriteLine();
+                
 
             }
             return response;
@@ -120,39 +123,52 @@ namespace SGCorporation.BLL
 
             do
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("(OH) Ohio     (MI) Michigan     (PA) Pennsylvania     (IN) Indiana");
+                Console.ResetColor();
                 Console.Write("Input the State Abbreviation: ");
                 stateInput = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(stateInput))
+                {
+                    stateInput = "1";
+                }
+
                 string stateName = stateInput.ToUpper();
 
-                if (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
-                    stateName == "IN")
-                {
+              
                     response = ValidInputCheckString(stateName);
                     Console.WriteLine(response.Message);
 
 
-                    if (response.Success)
+
+                    if (response.Success && (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
+                    stateName == "IN"))
                     {
                         newOrder.StateName = stateName.ToUpper();
                         Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-                        newOrder.TaxRate = stateTaxObject.TaxRate / 100;
+                        newOrder.TaxRate = stateTaxObject.TaxRate/100;
                     }
 
-                }
-                else
-                {
-                    response = ValidInputCheckString("1");
-                    Console.WriteLine();
-                    Console.WriteLine("Invalid state abbreviation");
-                    Console.WriteLine();
-                }
 
-            } while (response.Success == false || stateInput == null);
+                    else
+                    {
+                        response = ValidInputCheckString("1");
+                        Console.WriteLine();
+                        Console.WriteLine("Invalid state abbreviation");
+                        Console.WriteLine();
+                    }
+                
+
+            } while (response.Success == false || stateInput == "1");
 
             do
             {
+               Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Carpet     Laminate     Tile     Wood");
+                Console.ResetColor();
                 Console.Write("Input the Product Type: ");
                 productType = Console.ReadLine();
 
@@ -188,6 +204,7 @@ namespace SGCorporation.BLL
 
             do
             {
+                Console.Clear();
                 Console.Write("Input the Area: ");
                 area = Console.ReadLine();
                 if (string.IsNullOrEmpty(area))
@@ -211,7 +228,10 @@ namespace SGCorporation.BLL
             newOrder.Tax = (newOrder.MaterialCost + newOrder.LaborCost) * newOrder.TaxRate;
             newOrder.Total = newOrder.MaterialCost + newOrder.LaborCost + newOrder.Tax;
 
+            Console.Clear();
+
             Console.WriteLine();
+
             Console.WriteLine("Order Number:                    {0} " +
                               "\nCustomer Name:                   {1} " +
                               "\nState Name:                      {2}" +
@@ -236,6 +256,7 @@ namespace SGCorporation.BLL
                 newOrder.LaborCost,
                 newOrder.Tax,
                 newOrder.Total);
+
 
             Console.WriteLine();
 

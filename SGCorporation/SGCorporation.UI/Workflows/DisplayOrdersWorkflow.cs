@@ -18,6 +18,8 @@ namespace SGCorporation.UI.Workflows
         {
             DateTime userDate = GetDateFromUser();
 
+            Console.Clear();
+
             DisplayOrderInformation(userDate);
         }
 

@@ -56,43 +56,70 @@ namespace SGCorporation.UI.Workflows
                 }
             } while (order == null);
 
-            //try
-            //{
-            //    order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+            try
+            {
+                order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
 
-            //    throw new Exception();
-            //}
-            //catch (Exception ex)
-            //{
-            //   Console.WriteLine( oErrorLog.WriteErrorLog(ex.ToString()));
-            //}
+                order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+                order.StateName = PromptToEditStrings("StateName", order.StateName);
+                string stateName = order.StateName;
+
+                Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
+                order.TaxRate = currentStateTax.TaxRate;
+
+                order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
+
+                string productType = order.ProductType;
+                Product currentProduct = ops.ReturnProduct(productType);
+
+                order.CostPerSquareFoot = currentProduct.CostPerSquareFoot;
+
+                order.LaborCostPerSquareFoot = currentProduct.LaborCostPerSquareFoot;
+
+                order.Area = PromptToEditDecimal("Area", order.Area);
+
+                order.MaterialCost = order.Area * order.CostPerSquareFoot;
+                order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
+                order.Tax = (order.MaterialCost + order.LaborCost) * order.TaxRate;
+                order.Total = order.MaterialCost + order.LaborCost + order.Tax;
+
+                ops.EditOrder(currentDate, order);
+
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(oErrorLog.WriteErrorLog(ex.ToString()));
+                Console.WriteLine("Invalid entry");
+                Console.ReadLine();
+            }
 
 
 
-            order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
-            order.StateName = PromptToEditStrings("StateName", order.StateName);
-            string stateName = order.StateName;
+            //order.CustomerName = PromptToEditStrings("CustomerName", order.CustomerName);
+            //order.StateName = PromptToEditStrings("StateName", order.StateName);
+            //string stateName = order.StateName;
 
-            Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
-            order.TaxRate = currentStateTax.TaxRate;
+            //Tax currentStateTax = ops.ReturnTax(stateName.ToUpper());
+            //order.TaxRate = currentStateTax.TaxRate;
 
-            order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
+            //order.ProductType = PromptToEditStrings("ProductType", order.ProductType);
 
-            string productType = order.ProductType;
-            Product currentProduct = ops.ReturnProduct(productType);
+            //string productType = order.ProductType;
+            //Product currentProduct = ops.ReturnProduct(productType);
 
-            order.CostPerSquareFoot = currentProduct.CostPerSquareFoot;
+            //order.CostPerSquareFoot = currentProduct.CostPerSquareFoot;
 
-            order.LaborCostPerSquareFoot = currentProduct.LaborCostPerSquareFoot;
+            //order.LaborCostPerSquareFoot = currentProduct.LaborCostPerSquareFoot;
 
-            order.Area = PromptToEditDecimal("Area", order.Area);
+            //order.Area = PromptToEditDecimal("Area", order.Area);
 
-            order.MaterialCost = order.Area * order.CostPerSquareFoot;
-            order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
-            order.Tax = (order.MaterialCost + order.LaborCost) * order.TaxRate;
-            order.Total = order.MaterialCost + order.LaborCost + order.Tax;
+            //order.MaterialCost = order.Area * order.CostPerSquareFoot;
+            //order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
+            //order.Tax = (order.MaterialCost + order.LaborCost) * order.TaxRate;
+            //order.Total = order.MaterialCost + order.LaborCost + order.Tax;
 
-            ops.EditOrder(currentDate, order);
+            //ops.EditOrder(currentDate, order);
         }
 
         public DateTime PromptForDate()
@@ -136,6 +163,8 @@ namespace SGCorporation.UI.Workflows
                 if (answer.ToUpper() == "N")
                 {
                     return propertyValue;
+
+                    
                 }
             } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
