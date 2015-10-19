@@ -130,7 +130,7 @@ namespace SGCorporation.BLL
                 Console.Write("Input the State Abbreviation: ");
                 stateInput = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(stateInput))
+                if (string.IsNullOrEmpty(stateInput) || (stateInput.ToUpper() != "PA" && stateInput.ToUpper() != "IN" && stateInput.ToUpper() != "MI" && stateInput.ToUpper() != "OH"))
                 {
                     stateInput = "1";
                 }
@@ -419,7 +419,7 @@ namespace SGCorporation.BLL
                 {
                     response.Success = false;
 
-                    response.Message = "Invalid entry\nOnly alphabetical characters allowed";
+                    response.Message = "Invalid entry\nOnly the appropiate characters allowed";
                     return response;
                 }
             }
@@ -447,6 +447,7 @@ namespace SGCorporation.BLL
                 }
             }
             response.Success = true;
+            
             return response;
         }
 
