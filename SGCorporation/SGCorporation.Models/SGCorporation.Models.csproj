@@ -54,6 +54,7 @@
     <Compile Include="RemoveSlip.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Tax.cs" />
+    <Compile Include="WrongUserInputLog.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

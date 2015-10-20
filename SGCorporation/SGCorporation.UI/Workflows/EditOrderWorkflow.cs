@@ -39,6 +39,13 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine();
                     Console.WriteLine("That date does not exist");
                     Console.WriteLine();
+
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Edit An Order -> user input order date does not exist"
+                    };
+                    ops.PassOnWrongUserInput(log);
                 }
             } while (response.Success == false);
 
@@ -53,6 +60,13 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine();
                     Console.WriteLine("That order number does not exist");
                     Console.WriteLine();
+
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Edit An Order -> user input order number does not exist"
+                    };
+                    ops.PassOnWrongUserInput(log);
                 }
             } while (order == null);
 
@@ -142,7 +156,7 @@ namespace SGCorporation.UI.Workflows
             do
             {
                 Console.Write("Enter the order number: ");
-                 input = Console.ReadLine();
+                input = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(input))
                 {
@@ -179,9 +193,14 @@ namespace SGCorporation.UI.Workflows
                 if (answer.ToUpper() == "N")
                 {
                     return propertyValue;
-
-                    
                 }
+
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Edit An Order -> invalid user input -> {answer}"
+                };
+                ops.PassOnWrongUserInput(log);
             } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
             switch (propertyName)
@@ -214,6 +233,13 @@ namespace SGCorporation.UI.Workflows
                         Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
+
+                        WrongUserInputLog log1 = new WrongUserInputLog()
+                        {
+                            ErrorTime = DateTime.Now,
+                            Message = $"Edit An Order -> invalid user input -> {input}"
+                        };
+                        ops.PassOnWrongUserInput(log1);
                     }
 
                     if (input == propertyValue || string.IsNullOrEmpty(input))
@@ -251,6 +277,13 @@ namespace SGCorporation.UI.Workflows
                         Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
+
+                        WrongUserInputLog log2 = new WrongUserInputLog()
+                        {
+                            ErrorTime = DateTime.Now,
+                            Message = $"Edit An Order -> invalid user input -> {input1}"
+                        };
+                        ops.PassOnWrongUserInput(log2);
                     }
 
                     if (input1 == propertyValue || string.IsNullOrEmpty(input1))
@@ -269,8 +302,8 @@ namespace SGCorporation.UI.Workflows
                         Console.Write("Enter a new {0}: ", propertyName);
                         input2 = Console.ReadLine();
 
-                        if (string.IsNullOrEmpty(input2) ||( input2.ToUpper() != "CARPET" && input2.ToUpper() != "TILE" && input2.ToUpper() != "WOOD" &&
-                            input2.ToUpper() != "LAMINATE" ))
+                        if (string.IsNullOrEmpty(input2) || (input2.ToUpper() != "CARPET" && input2.ToUpper() != "TILE" && input2.ToUpper() != "WOOD" &&
+                            input2.ToUpper() != "LAMINATE"))
                         {
                             input2 = "1";
                         }
@@ -278,7 +311,7 @@ namespace SGCorporation.UI.Workflows
                         response = ops.ValidInputCheckString(input2);
 
                         if (response.Success == false)
-                        { 
+                        {
                             Console.WriteLine(response.Message);
                         }
 
@@ -291,6 +324,13 @@ namespace SGCorporation.UI.Workflows
                         Console.WriteLine();
                         Console.WriteLine("Invalid entry");
                         Console.ReadLine();
+
+                        WrongUserInputLog log3 = new WrongUserInputLog()
+                        {
+                            ErrorTime = DateTime.Now,
+                            Message = $"Edit An Order -> invalid user input -> {input3}"
+                        };
+                        ops.PassOnWrongUserInput(log3);
                     }
 
                     if (input3 == propertyValue || string.IsNullOrEmpty(input3))
@@ -302,6 +342,13 @@ namespace SGCorporation.UI.Workflows
                 default:
                     Console.WriteLine();
                     Console.WriteLine("Invalid entry");
+
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Edit An Order -> invalid user input"
+                    };
+                    ops.PassOnWrongUserInput(log);
                     return Console.ReadLine();
 
             }
@@ -324,7 +371,12 @@ namespace SGCorporation.UI.Workflows
                 {
                     return propertyValue;
                 }
-
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Edit An Order -> invalid user input -> {answer}"
+                };
+                ops.PassOnWrongUserInput(log);
             } while (answer.ToUpper() != "Y" || answer.ToUpper() != "N" || answer == null);
 
             switch (propertyName)
@@ -342,13 +394,18 @@ namespace SGCorporation.UI.Workflows
                         }
 
                         response = ops.ValidInputCheckDecimal(input);
-                       
+
 
                         if (response.Success == false)
                         {
                             Console.WriteLine(response.Message);
                         }
-
+                        WrongUserInputLog log = new WrongUserInputLog()
+                        {
+                            ErrorTime = DateTime.Now,
+                            Message = $"Edit An Order -> invalid user input -> {input}"
+                        };
+                        ops.PassOnWrongUserInput(log);
                     } while (response.Success == false);
 
 
@@ -359,7 +416,7 @@ namespace SGCorporation.UI.Workflows
                         if (inputAmount == propertyValue)
                         {
                             return propertyValue;
-                           
+
                         }
 
                         return inputAmount;
@@ -368,10 +425,16 @@ namespace SGCorporation.UI.Workflows
                     //Console.WriteLine("Invalid entry");
                     //Console.ReadLine();
                     return 0;
-                    
+
 
                 default:
                     Console.WriteLine("Invalid entry");
+                    WrongUserInputLog log1 = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Edit An Order -> invalid user input"
+                    };
+                    ops.PassOnWrongUserInput(log1);
                     Console.ReadLine();
                     return 0;
             }

@@ -12,7 +12,7 @@ namespace SGCorporation.UI.Workflows
 {
     public class DisplayOrdersWorkflow
     {
-        ErrorLog oErrorLog  = new ErrorLog();
+        ErrorLog oErrorLog = new ErrorLog();
 
         public void Execute()
         {
@@ -34,18 +34,25 @@ namespace SGCorporation.UI.Workflows
                 Console.Write("Enter the date for your order (MM/DD/YYYY): ");
 
 
-                 input = Console.ReadLine();
-                //DateTime date;
+                input = Console.ReadLine();
 
-               // DateTime.TryParse(input, out date);
+
                 DateTime.TryParse(input, out date1);
 
                 throw new Exception();
+
 
             }
             catch (Exception ex)
             {
                 oErrorLog.WriteErrorLog(ex.ToString());
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Display An Order -> invalid user input -> {input}"
+                };
+                ops.PassOnWrongUserInput(log);
             }
 
             DateTime date;

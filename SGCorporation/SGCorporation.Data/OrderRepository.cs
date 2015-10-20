@@ -148,5 +148,13 @@ namespace SGCorporation.Data
             }
             return newOrderNo;
         }
+
+        public void LogWrongUserInput(WrongUserInputLog log)
+        {
+            using (StreamWriter writer = File.AppendText(String.Format(@"DataFiles\log.txt")))
+            {
+                writer.WriteLine("{0:s} : {1}", log.ErrorTime, log.Message);
+            }           
+        }
     }
 }

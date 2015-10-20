@@ -29,6 +29,14 @@ namespace SGCorporation.UI.Workflows
                     Console.WriteLine();
                     Console.WriteLine("Invalid input format or that date does not exist");
                     Console.WriteLine();
+
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Remove An Order -> Invalid user input for date"
+                    };
+                    ops.PassOnWrongUserInput(log);
+
                 }
             } while (response1.Success == false);
 
@@ -40,6 +48,12 @@ namespace SGCorporation.UI.Workflows
                 {
                     Console.WriteLine();
                     Console.WriteLine("That order number does not exist");
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Remove An Order -> Order number does not exist"
+                    };
+                    ops.PassOnWrongUserInput(log);
                     Console.WriteLine();
                 }
             } while (orderToRemove == null);

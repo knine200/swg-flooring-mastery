@@ -42,6 +42,15 @@ namespace SGCorporation.BLL
             {
                 response.Success = false;
                 response.Message = "There are no orders for that date";
+
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Add An Order -> Invalid input date"
+                };
+                ops.PassOnWrongUserInput(log);
+
                 return response;
             }
 
@@ -50,7 +59,7 @@ namespace SGCorporation.BLL
 
             foreach (Order order in orders)
             {
-                
+
 
                 Console.WriteLine();
 
@@ -80,7 +89,7 @@ namespace SGCorporation.BLL
                     order.Tax,
                     order.Total);
                 Console.WriteLine();
-                
+
 
             }
             return response;
@@ -90,7 +99,7 @@ namespace SGCorporation.BLL
         {
             var repo = factory.CreateOrderRepository();
 
-          //  Response response = new Response();
+            //  Response response = new Response();
             //Order newOrder = new Order();
             string customerNameInput;
             string stateInput;
@@ -117,6 +126,13 @@ namespace SGCorporation.BLL
                     newOrder.CustomerName = customerNameInput;
                 }
 
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Add An Order -> Invalid user input -> {customerNameInput}"
+                };
+                ops.PassOnWrongUserInput(log);
 
             } while (response.Success == false || customerNameInput == "1");
 
@@ -137,35 +153,42 @@ namespace SGCorporation.BLL
 
                 string stateName = stateInput.ToUpper();
 
-              
-                    response = ValidInputCheckString(stateName);
-                    Console.WriteLine(response.Message);
+
+                response = ValidInputCheckString(stateName);
+                Console.WriteLine(response.Message);
 
 
 
-                    if (response.Success && (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
-                    stateName == "IN"))
-                    {
-                        newOrder.StateName = stateName.ToUpper();
-                        Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
-                        newOrder.TaxRate = stateTaxObject.TaxRate/100;
-                    }
+                if (response.Success && (stateName == "OH" || stateName == "MI" || stateName == "PA" ||
+                stateName == "IN"))
+                {
+                    newOrder.StateName = stateName.ToUpper();
+                    Tax stateTaxObject = TaxRepo.GetTax(stateName.ToUpper());
+                    newOrder.TaxRate = stateTaxObject.TaxRate / 100;
+                }
 
 
-                    else
-                    {
-                        response = ValidInputCheckString("1");
-                        Console.WriteLine();
-                        Console.WriteLine("Invalid state abbreviation");
-                        Console.WriteLine();
-                    }
-                
+                else
+                {
+                    response = ValidInputCheckString("1");
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid state abbreviation");
+                    Console.WriteLine();
+                }
+
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Add An Order -> Invalid user input -> {stateName}"
+                };
+                ops.PassOnWrongUserInput(log);
 
             } while (response.Success == false || stateInput == "1");
 
             do
             {
-               Console.Clear();
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Carpet     Laminate     Tile     Wood");
                 Console.ResetColor();
@@ -200,6 +223,14 @@ namespace SGCorporation.BLL
                     Console.WriteLine();
                 }
 
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Add An Order -> Invalid user input -> {productType}"
+                };
+                ops.PassOnWrongUserInput(log);
+
             } while (response.Success == false || productType == "1");
 
             do
@@ -220,6 +251,14 @@ namespace SGCorporation.BLL
                     newOrder.Area = decimal.Parse(area);
 
                 }
+
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Add An Order -> Invalid user input -> {area}"
+                };
+                ops.PassOnWrongUserInput(log);
 
             } while (response.Success == false || area == null || newOrder.Area < 0);
 
@@ -297,6 +336,15 @@ namespace SGCorporation.BLL
                 {
                     response.Success = false;
                     response.Message = "Order creation cancelled";
+
+                    OrderOperations ops = new OrderOperations();
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Add An Order -> Invalid user input -> {userInput}"
+                    };
+                    ops.PassOnWrongUserInput(log);
+
                 }
             }
             return response;
@@ -333,6 +381,15 @@ namespace SGCorporation.BLL
             {
                 response.Success = false;
                 response.Message = "That order does not exist";
+
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Edit An Order -> Order does not exist"
+                };
+                ops.PassOnWrongUserInput(log);
+
             }
 
             return response;
@@ -354,6 +411,14 @@ namespace SGCorporation.BLL
             {
                 response.Success = false;
                 response.Message = "That order number does not exist";
+
+                OrderOperations ops = new OrderOperations();
+                WrongUserInputLog log = new WrongUserInputLog()
+                {
+                    ErrorTime = DateTime.Now,
+                    Message = $"Remove An Order -> Order number does not exist"
+                };
+                ops.PassOnWrongUserInput(log);
 
             }
 
@@ -420,6 +485,15 @@ namespace SGCorporation.BLL
                     response.Success = false;
 
                     response.Message = "Invalid entry\nOnly the appropiate characters allowed";
+
+                    OrderOperations ops = new OrderOperations();
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Add An Order -> Invalid user input -> {userInput}"
+                    };
+                    ops.PassOnWrongUserInput(log);
+
                     return response;
                 }
             }
@@ -443,14 +517,28 @@ namespace SGCorporation.BLL
                 {
                     response.Success = false;
                     response.Message = "Invalid entry\nOnly number characters allowed";
+
+                    OrderOperations ops = new OrderOperations();
+                    WrongUserInputLog log = new WrongUserInputLog()
+                    {
+                        ErrorTime = DateTime.Now,
+                        Message = $"Add An Order -> Invalid user input -> {userInput}"
+                    };
+                    ops.PassOnWrongUserInput(log);
+
                     return response;
                 }
             }
             response.Success = true;
-            
+
             return response;
         }
 
+        public void PassOnWrongUserInput(WrongUserInputLog log)
+        {
+            OrderRepository repo = new OrderRepository();
 
+            repo.LogWrongUserInput(log);
+        }
     }
 }
