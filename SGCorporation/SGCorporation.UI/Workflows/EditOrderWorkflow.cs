@@ -104,6 +104,7 @@ namespace SGCorporation.UI.Workflows
             catch (Exception ex)
             {
                 oErrorLog.WriteErrorLog(ex.ToString());
+                
                 Console.ReadLine();
             }
 
