@@ -80,13 +80,53 @@ namespace SGCorporation.Tests
         }
 
         [Test]
-        public void PromptToEditStrings_PropertyNameAndValue_ReturnString()
+        public void GetByNo_OrderNo_ReturnOrder()
         {
             OrderRepoTest repoTest = new OrderRepoTest();
 
             var result = repoTest.GetByNo(1);
 
             Assert.AreEqual(1, result.OrderNumber);
+        }
+
+        [Test]
+        public void PromptForOrderNo_ReturnInt()
+        {
+            RemoveOrderWorkflow rwf = new RemoveOrderWorkflow();
+
+            int result = rwf.PromptForOrderNo();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void PromptForDate_ReturnDateTime()
+        {
+            RemoveOrderWorkflow rwf = new RemoveOrderWorkflow();
+
+            DateTime result = rwf.PromptForDate();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void GetProduct_ProductType_ReturnProduct()
+        {
+            ProductRepository repo = new ProductRepository();
+
+            Product result = repo.GetProduct("Wood");
+
+            Assert.AreEqual("Wood", result.ProductType);
+        }
+
+        [Test]
+        public void GetTax_StateAbbreviation_ReturnTax()
+        {
+            TaxRepository repo = new TaxRepository();
+
+            Tax result = repo.GetTax("IN");
+
+            Assert.AreEqual("IN", result.StateAbbreviation);
         }
     }
 }
